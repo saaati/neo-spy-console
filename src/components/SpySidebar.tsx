@@ -1,0 +1,83 @@
+import { 
+  MapPin, 
+  Camera, 
+  MessageSquare, 
+  Mic, 
+  FileText, 
+  Users, 
+  Settings,
+  Eye
+} from "lucide-react";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar";
+import { ActivePanel } from "./SpyDashboard";
+
+interface SpySidebarProps {
+  activePanel: ActivePanel;
+  setActivePanel: (panel: ActivePanel) => void;
+}
+
+const menuItems = [
+  { id: 'location' as ActivePanel, title: 'Localização', icon: MapPin },
+  { id: 'cameras' as ActivePanel, title: 'Câmeras', icon: Camera },
+  { id: 'messages' as ActivePanel, title: 'Mensagens', icon: MessageSquare },
+  { id: 'microphone' as ActivePanel, title: 'Microfone', icon: Mic },
+  { id: 'logs' as ActivePanel, title: 'Logs', icon: FileText },
+  { id: 'targets' as ActivePanel, title: 'Alvos', icon: Users },
+  { id: 'system' as ActivePanel, title: 'Sistema', icon: Settings },
+];
+
+export const SpySidebar = ({ activePanel, setActivePanel }: SpySidebarProps) => {
+  return (
+    <Sidebar className="border-r border-primary/20 bg-sidebar">
+      <SidebarContent>
+        <div className="p-4 border-b border-primary/20">
+          <div className="flex items-center space-x-2">
+            <Eye className="w-5 h-5 text-primary cyber-glow" />
+            <span className="font-mono text-primary font-semibold">OCULARIS</span>
+          </div>
+          <p className="text-xs text-terminal-dim mt-1">Surveillance System</p>
+        </div>
+
+        <SidebarGroup>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {menuItems.map((item) => (
+                <SidebarMenuItem key={item.id}>
+                  <SidebarMenuButton 
+                    onClick={() => setActivePanel(item.id)}
+                    className={`
+                      font-mono transition-all duration-200 hover:bg-primary/10 hover:border-l-2 hover:border-primary
+                      ${activePanel === item.id 
+                        ? 'bg-primary/20 border-l-2 border-primary text-primary cyber-glow' 
+                        : 'text-sidebar-foreground'
+                      }
+                    `}
+                  >
+                    <item.icon className="w-4 h-4" />
+                    <span>{item.title}</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <div className="mt-auto p-4 border-t border-primary/20">
+          <div className="text-xs text-terminal-dim font-mono">
+            <div>Status: <span className="text-primary pulse-green">ACTIVE</span></div>
+            <div>Security: <span className="text-neon-red">MAXIMUM</span></div>
+            <div>Access: <span className="text-warning">LEVEL 7</span></div>
+          </div>
+        </div>
+      </SidebarContent>
+    </Sidebar>
+  );
+};

@@ -61,7 +61,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				terminal: 'hsl(var(--terminal))',
+				'terminal-dim': 'hsl(var(--terminal-dim))',
+				'cyber-blue': 'hsl(var(--cyber-blue))',
+				'neon-red': 'hsl(var(--neon-red))',
+				warning: 'hsl(var(--warning))'
+			},
+			fontFamily: {
+				mono: ['JetBrains Mono', 'Courier New', 'monospace'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
