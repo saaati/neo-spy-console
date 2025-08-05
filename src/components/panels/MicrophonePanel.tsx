@@ -18,6 +18,7 @@ interface MicrophonePanelProps {
 export const MicrophonePanel = ({ hideInfo = false }: MicrophonePanelProps) => {
   const [isListening, setIsListening] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [listeningLogs, setListeningLogs] = useState<{id: string, action: string, timestamp: string, device: string}[]>([]);
   const [audioLevel] = useState(65);
 
   return (
