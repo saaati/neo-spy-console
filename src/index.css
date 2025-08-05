@@ -20,6 +20,7 @@
     /* Primary - Neon Green (Matrix style) */
     --primary: 120 100% 50%;
     --primary-foreground: 0 0% 0%;
+    --stealth-green: 120 100% 40%;
     
     /* Secondary - Neon Red (Alert/Danger) */
     --secondary: 0 100% 50%;
