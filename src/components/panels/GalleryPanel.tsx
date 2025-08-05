@@ -4,6 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import gallery1 from "@/assets/gallery1.jpg";
+import gallery2 from "@/assets/gallery2.jpg";
+import gallery3 from "@/assets/gallery3.jpg";
+import gallery4 from "@/assets/gallery4.jpg";
+import gallery5 from "@/assets/gallery5.jpg";
+import gallery6 from "@/assets/gallery6.jpg";
 
 interface GalleryItem {
   id: string;
@@ -28,60 +34,63 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
   const galleryItems: GalleryItem[] = [
     {
       id: '1',
-      name: 'IMG_0123.jpg',
+      name: 'protesto_oscarfreire.jpg',
       type: 'photo',
       date: '2024-01-15 14:23',
       size: '2.4 MB',
       location: 'São Paulo, SP',
       device: 'iPhone 15 Pro',
-      thumbnail: '📸'
+      thumbnail: gallery1
     },
     {
       id: '2',
-      name: 'Screenshot_20240115.png',
-      type: 'screenshot',
+      name: 'pessoa_suspeita.jpg',
+      type: 'photo',
       date: '2024-01-15 13:45',
       size: '892 KB',
+      location: 'Centro, SP',
       device: 'Samsung S24',
-      thumbnail: '📱'
+      thumbnail: gallery2
     },
     {
       id: '3',
-      name: 'VID_20240115.mp4',
-      type: 'video',
+      name: 'armas_apreendidas.jpg',
+      type: 'photo',
       date: '2024-01-15 12:30',
       size: '15.2 MB',
       location: 'Rio de Janeiro, RJ',
       device: 'Xiaomi 14',
-      thumbnail: '🎥'
+      thumbnail: gallery3
     },
     {
       id: '4',
-      name: 'IMG_0124.jpg',
+      name: 'local_encontro.jpg',
       type: 'photo',
       date: '2024-01-15 11:15',
       size: '3.1 MB',
       location: 'Brasília, DF',
       device: 'OnePlus 12',
-      thumbnail: '📸'
+      thumbnail: gallery4
     },
     {
       id: '5',
-      name: 'IMG_0125.jpg',
+      name: 'casal_praca.jpg',
       type: 'photo',
       date: '2024-01-15 10:00',
       size: '1.8 MB',
+      location: 'São Paulo, SP',
       device: 'iPhone 15 Pro',
-      thumbnail: '📸'
+      thumbnail: gallery5
     },
     {
       id: '6',
-      name: 'Screenshot_camera.png',
-      type: 'screenshot',
+      name: 'celebridades.jpg',
+      type: 'photo',
       date: '2024-01-15 09:30',
       size: '654 KB',
+      location: 'Los Angeles, CA',
       device: 'Samsung S24',
-      thumbnail: '📱'
+      thumbnail: gallery6
     }
   ];
 
@@ -157,8 +166,12 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
             </CardHeader>
             <CardContent className="space-y-3">
               {/* Thumbnail */}
-              <div className="aspect-square bg-muted/20 rounded cyber-border flex items-center justify-center text-4xl">
-                {item.thumbnail}
+              <div className="aspect-square bg-muted/20 rounded cyber-border overflow-hidden">
+                <img 
+                  src={item.thumbnail} 
+                  alt={item.name} 
+                  className="w-full h-full object-cover"
+                />
               </div>
 
               {/* File Info */}
@@ -193,9 +206,15 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
                       Ver
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="cyber-border bg-card/90 backdrop-blur-sm">
+                  <DialogContent className="cyber-border bg-card/90 backdrop-blur-sm max-w-2xl">
                     <div className="text-center space-y-4">
-                      <div className="text-6xl">{item.thumbnail}</div>
+                      <div className="w-full max-h-96 overflow-hidden rounded">
+                        <img 
+                          src={item.thumbnail} 
+                          alt={item.name} 
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
                       <div>
                         <h3 className="font-mono text-primary">{maskText(item.name)}</h3>
                         <p className="text-sm text-muted-foreground">{maskText(item.device)}</p>

@@ -19,6 +19,7 @@ export const MicrophonePanel = ({ hideInfo = false }: MicrophonePanelProps) => {
   const [isListening, setIsListening] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [listeningLogs, setListeningLogs] = useState<{id: string, action: string, timestamp: string, device: string}[]>([]);
+  const [recordings, setRecordings] = useState(fakeRecordings);
   const [audioLevel] = useState(65);
 
   const maskText = (text: string) => hideInfo ? '████████' : text;
@@ -36,6 +37,18 @@ export const MicrophonePanel = ({ hideInfo = false }: MicrophonePanelProps) => {
       timestamp: now,
       device: 'Microfone Principal'
     }, ...prev].slice(0, 10)); // Keep only last 10 logs
+    
+    // When stopping listening, add a new recording
+    if (!newState) {
+      const newRecording = {
+        id: recordings.length + 1,
+        name: `audio_capture_${String(recordings.length + 1).padStart(3, '0')}.wav`,
+        duration: `${Math.floor(Math.random() * 3)}:${String(Math.floor(Math.random() * 60)).padStart(2, '0')}`,
+        size: `${(Math.random() * 5 + 1).toFixed(1)} MB`,
+        timestamp: now
+      };
+      setRecordings(prev => [newRecording, ...prev]);
+    }
   };
 
   return (
@@ -148,7 +161,7 @@ export const MicrophonePanel = ({ hideInfo = false }: MicrophonePanelProps) => {
           </CardHeader>
           <CardContent>
             <div className="space-y-2 max-h-48 md:max-h-64 overflow-y-auto">
-              {fakeRecordings.slice(0, 3).map((recording) => (
+              {recordings.slice(0, 5).map((recording) => (
                 <div 
                   key={recording.id}
                   className="p-2 rounded border border-border bg-muted/10 hover:border-primary/30 transition-all"

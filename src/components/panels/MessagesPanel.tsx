@@ -38,6 +38,7 @@ interface MessagesPanelProps {
 
 export const MessagesPanel = ({ hideInfo = false }: MessagesPanelProps) => {
   const [selectedDevice, setSelectedDevice] = useState<string>('all');
+  const [selectedConversation, setSelectedConversation] = useState<Conversation | null>(null);
 
   const devices = ['all', 'iPhone 15 Pro', 'Samsung S24', 'Xiaomi 14', 'OnePlus 12'];
 
@@ -118,8 +119,38 @@ export const MessagesPanel = ({ hideInfo = false }: MessagesPanelProps) => {
         { id: 3, sender: "contact", message: "Bem também! Vou aí hoje", time: "14:22" },
         { id: 4, sender: "contact", message: "Chegando em 10 minutos. Estou no trânsito.", time: "14:25" }
       ]
+    },
+    {
+      contact: "João Santos",
+      device: "Samsung S24",
+      messages: [
+        { id: 1, sender: "contact", message: "A reunião de hoje foi cancelada", time: "13:40" },
+        { id: 2, sender: "user", message: "Por que foi cancelada?", time: "13:42" },
+        { id: 3, sender: "contact", message: "Reunião cancelada. Reagendaremos para amanhã.", time: "13:45" }
+      ]
+    },
+    {
+      contact: "Carlos Mendes",
+      device: "OnePlus 12",
+      messages: [
+        { id: 1, sender: "contact", message: "E aí, como foi o final de semana?", time: "11:45" },
+        { id: 2, sender: "user", message: "Foi ótimo! E o seu?", time: "11:48" },
+        { id: 3, sender: "contact", message: "Vamos nos encontrar hoje?", time: "11:50" }
+      ]
+    },
+    {
+      contact: "Ana Costa",
+      device: "Xiaomi 14",
+      messages: [
+        { id: 1, sender: "contact", message: "Olha essa foto que tirei!", time: "12:28" },
+        { id: 2, sender: "contact", message: "📸 Foto", time: "12:30", hasMedia: true, mediaType: "photo" }
+      ]
     }
   ];
+
+  const findConversation = (contact: string) => {
+    return conversations.find(conv => conv.contact === contact);
+  };
 
   const recentCalls = [
     { contact: "Carlos Mendes", number: "+55 11 96666-5555", time: "14:10", duration: "3:24", type: "incoming", device: "OnePlus 12" },
@@ -197,16 +228,41 @@ export const MessagesPanel = ({ hideInfo = false }: MessagesPanelProps) => {
               <TabsContent value="whatsapp" className="mt-0">
                 <div className="space-y-3 max-h-64 md:max-h-96 overflow-y-auto">
                   {getMessagesByType('whatsapp').map((msg) => (
-                    <div key={msg.id} className="border border-green-500/20 rounded p-3 hover:bg-green-500/5 transition-colors">
-                      <div className="flex justify-between items-start mb-2">
-                        <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-full" style={{backgroundImage: 'url(https://i.pinimg.com/736x/fa/25/b5/fa25b56f831a5d8cdd2040179fc6b4f3.jpg)', backgroundSize: 'cover'}}></div>
-                          <span className="text-sm font-medium text-green-400">{maskText(msg.contact)}</span>
+                    <Dialog key={msg.id}>
+                      <DialogTrigger asChild>
+                        <div className="border border-green-500/20 rounded p-3 hover:bg-green-500/5 transition-colors cursor-pointer">
+                          <div className="flex justify-between items-start mb-2">
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 rounded-full" style={{backgroundImage: 'url(https://i.pinimg.com/736x/fa/25/b5/fa25b56f831a5d8cdd2040179fc6b4f3.jpg)', backgroundSize: 'cover'}}></div>
+                              <span className="text-sm font-medium text-green-400">{maskText(msg.contact)}</span>
+                            </div>
+                            <span className="text-xs text-muted-foreground">{msg.time}</span>
+                          </div>
+                          <div className="text-sm text-foreground">{msg.message}</div>
                         </div>
-                        <span className="text-xs text-muted-foreground">{msg.time}</span>
-                      </div>
-                      <div className="text-sm text-foreground">{msg.message}</div>
-                    </div>
+                      </DialogTrigger>
+                      <DialogContent className="cyber-border bg-card/90 backdrop-blur-sm max-w-md">
+                        <DialogHeader>
+                          <DialogTitle className="text-green-400 flex items-center gap-2">
+                            💬 {maskText(msg.contact)}
+                          </DialogTitle>
+                        </DialogHeader>
+                        <div className="space-y-3 max-h-80 overflow-y-auto">
+                          {findConversation(msg.contact)?.messages.map((convMsg) => (
+                            <div key={convMsg.id} className={`flex ${convMsg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                              <div className={`max-w-[70%] p-3 rounded-lg ${
+                                convMsg.sender === 'user' 
+                                  ? 'bg-green-600 text-white' 
+                                  : 'bg-muted text-foreground'
+                              }`}>
+                                <div className="text-sm">{convMsg.message}</div>
+                                <div className="text-xs opacity-70 mt-1">{convMsg.time}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   ))}
                 </div>
               </TabsContent>
@@ -214,16 +270,41 @@ export const MessagesPanel = ({ hideInfo = false }: MessagesPanelProps) => {
               <TabsContent value="telegram" className="mt-0">
                 <div className="space-y-3 max-h-64 md:max-h-96 overflow-y-auto">
                   {getMessagesByType('telegram').map((msg) => (
-                    <div key={msg.id} className="border border-blue-500/20 rounded p-3 hover:bg-blue-500/5 transition-colors">
-                      <div className="flex justify-between items-start mb-2">
-                        <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">✈️</div>
-                          <span className="text-sm font-medium text-blue-400">{maskText(msg.contact)}</span>
+                    <Dialog key={msg.id}>
+                      <DialogTrigger asChild>
+                        <div className="border border-blue-500/20 rounded p-3 hover:bg-blue-500/5 transition-colors cursor-pointer">
+                          <div className="flex justify-between items-start mb-2">
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">✈️</div>
+                              <span className="text-sm font-medium text-blue-400">{maskText(msg.contact)}</span>
+                            </div>
+                            <span className="text-xs text-muted-foreground">{msg.time}</span>
+                          </div>
+                          <div className="text-sm text-foreground">{msg.message}</div>
                         </div>
-                        <span className="text-xs text-muted-foreground">{msg.time}</span>
-                      </div>
-                      <div className="text-sm text-foreground">{msg.message}</div>
-                    </div>
+                      </DialogTrigger>
+                      <DialogContent className="cyber-border bg-card/90 backdrop-blur-sm max-w-md">
+                        <DialogHeader>
+                          <DialogTitle className="text-blue-400 flex items-center gap-2">
+                            ✈️ {maskText(msg.contact)}
+                          </DialogTitle>
+                        </DialogHeader>
+                        <div className="space-y-3 max-h-80 overflow-y-auto">
+                          {findConversation(msg.contact)?.messages.map((convMsg) => (
+                            <div key={convMsg.id} className={`flex ${convMsg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                              <div className={`max-w-[70%] p-3 rounded-lg ${
+                                convMsg.sender === 'user' 
+                                  ? 'bg-blue-600 text-white' 
+                                  : 'bg-muted text-foreground'
+                              }`}>
+                                <div className="text-sm">{convMsg.message}</div>
+                                <div className="text-xs opacity-70 mt-1">{convMsg.time}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   ))}
                 </div>
               </TabsContent>
@@ -231,13 +312,38 @@ export const MessagesPanel = ({ hideInfo = false }: MessagesPanelProps) => {
               <TabsContent value="sms" className="mt-0">
                 <div className="space-y-3 max-h-64 md:max-h-96 overflow-y-auto">
                   {getMessagesByType('sms').map((msg) => (
-                    <div key={msg.id} className="border border-primary/20 rounded p-3 hover:bg-primary/5 transition-colors">
-                      <div className="flex justify-between items-start mb-2">
-                        <span className="text-sm font-medium text-primary">{maskText(msg.contact)}</span>
-                        <span className="text-xs text-muted-foreground">{msg.time}</span>
-                      </div>
-                      <div className="text-sm text-foreground">{msg.message}</div>
-                    </div>
+                    <Dialog key={msg.id}>
+                      <DialogTrigger asChild>
+                        <div className="border border-primary/20 rounded p-3 hover:bg-primary/5 transition-colors cursor-pointer">
+                          <div className="flex justify-between items-start mb-2">
+                            <span className="text-sm font-medium text-primary">{maskText(msg.contact)}</span>
+                            <span className="text-xs text-muted-foreground">{msg.time}</span>
+                          </div>
+                          <div className="text-sm text-foreground">{msg.message}</div>
+                        </div>
+                      </DialogTrigger>
+                      <DialogContent className="cyber-border bg-card/90 backdrop-blur-sm max-w-md">
+                        <DialogHeader>
+                          <DialogTitle className="text-primary flex items-center gap-2">
+                            📱 {maskText(msg.contact)}
+                          </DialogTitle>
+                        </DialogHeader>
+                        <div className="space-y-3 max-h-80 overflow-y-auto">
+                          {findConversation(msg.contact)?.messages.map((convMsg) => (
+                            <div key={convMsg.id} className={`flex ${convMsg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                              <div className={`max-w-[70%] p-3 rounded-lg ${
+                                convMsg.sender === 'user' 
+                                  ? 'bg-primary text-white' 
+                                  : 'bg-muted text-foreground'
+                              }`}>
+                                <div className="text-sm">{convMsg.message}</div>
+                                <div className="text-xs opacity-70 mt-1">{convMsg.time}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   ))}
                 </div>
               </TabsContent>
