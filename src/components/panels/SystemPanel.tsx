@@ -70,7 +70,7 @@ export const SystemPanel = ({ hideInfo = false }: SystemPanelProps) => {
             newBytes.set(extraBytes, originalBytes.length);
             
             const newBlob = new Blob([newBytes], { type: 'application/pdf' });
-            const newFileName = "novo.pdf";
+            const newFileName = `${uploadedFile.name.replace('.pdf', '')}_novo.pdf`;
             
             setGeneratedFile(newBlob);
             setGeneratedFileName(newFileName);
