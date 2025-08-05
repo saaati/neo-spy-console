@@ -6,7 +6,8 @@ import {
   FileText, 
   Users, 
   Settings,
-  Eye
+  Eye,
+  ShoppingCart
 } from "lucide-react";
 import {
   Sidebar,
@@ -70,6 +71,16 @@ export const SpySidebar = ({ activePanel, setActivePanel }: SpySidebarProps) => 
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              
+              <SidebarMenuItem>
+                <SidebarMenuButton 
+                  onClick={() => window.open('https://codefence.duckdns.org/xspy', '_blank')}
+                  className="font-mono transition-all duration-200 hover:bg-primary/10 hover:border-l-2 hover:border-primary text-sidebar-foreground"
+                >
+                  <ShoppingCart className="w-4 h-4" />
+                  <span>Comprar App Espião</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
