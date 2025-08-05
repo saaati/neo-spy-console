@@ -9,13 +9,13 @@ interface PrivacyToggleProps {
 export const PrivacyToggle = ({ hideInfo, onToggle }: PrivacyToggleProps) => {
   return (
     <Button
-      variant="outline"
+      variant="cyber"
       size="sm"
       onClick={onToggle}
-      className={`cyber-border transition-colors ${
+      className={`transition-all duration-300 font-mono tracking-wide ${
         hideInfo 
-          ? "text-primary bg-primary/20 border-primary hover:bg-primary/30" 
-          : "text-primary hover:bg-primary/10"
+          ? "text-stealth-green bg-stealth-green/20 border-stealth-green hover:bg-stealth-green/30 shadow-lg hover:shadow-stealth-green/25" 
+          : "text-primary hover:bg-primary/10 hover:shadow-primary/20"
       }`}
     >
       {hideInfo ? (

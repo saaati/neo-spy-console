@@ -57,9 +57,11 @@ export const SpyDashboard = () => {
         <div className="flex w-full">
           <SpySidebar activePanel={activePanel} setActivePanel={setActivePanel} />
           
-          <main className="flex-1 p-2 md:p-6">
-            <div className="cyber-border rounded bg-card/50 backdrop-blur-sm h-full">
-              {renderActivePanel()}
+          <main className="flex-1 p-3 md:p-8 lg:p-10">
+            <div className="glass-card cyber-border rounded-xl h-full min-h-[calc(100vh-7rem)] overflow-hidden">
+              <div className="p-4 md:p-6 lg:p-8 h-full">
+                {renderActivePanel()}
+              </div>
             </div>
           </main>
         </div>
