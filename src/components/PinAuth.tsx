@@ -44,7 +44,7 @@ export const PinAuth = ({ onAuthenticated }: PinAuthProps) => {
             <Lock className="w-8 h-8 text-primary terminal-glow" />
           </div>
           <CardTitle className="text-2xl font-mono terminal-glow text-primary">
-            SISTEMA XSPY
+            XSPY
           </CardTitle>
           <p className="text-muted-foreground">
             Digite o PIN para acessar o painel

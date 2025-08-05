@@ -41,10 +41,13 @@ export const SpySidebar = ({ activePanel, setActivePanel }: SpySidebarProps) => 
       <SidebarContent>
         <div className="p-4 border-b border-primary/20">
           <div className="flex items-center space-x-2">
-            <Eye className="w-5 h-5 text-primary cyber-glow" />
-            <span className="font-mono text-primary font-semibold">OCULARIS</span>
+            <div className="relative">
+              <Eye className="w-5 h-5 text-primary cyber-glow" />
+              <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-neon-red rounded-full animate-pulse"></div>
+            </div>
+            <span className="font-mono text-primary font-semibold">XSPY</span>
           </div>
-          <p className="text-xs text-terminal-dim mt-1">Surveillance System</p>
+          <p className="text-xs text-terminal-dim mt-1">Neural Surveillance</p>
         </div>
 
         <SidebarGroup>
