@@ -84,28 +84,6 @@ export const MessagesPanel = ({ hideInfo = false }: MessagesPanelProps) => {
       message: "Vamos nos encontrar hoje?",
       unread: true,
       device: "OnePlus 12"
-    },
-    {
-      id: 5,
-      type: "whatsapp",
-      contact: "Patricia Lima",
-      number: "+55 11 94444-3333",
-      time: "11:15",
-      message: "🎥 Vídeo",
-      unread: false,
-      device: "iPhone 15 Pro",
-      hasMedia: true,
-      mediaType: "video"
-    },
-    {
-      id: 6,
-      type: "telegram",
-      contact: "Roberto Carlos",
-      number: "@roberto_c",
-      time: "10:30",
-      message: "Documentos importantes enviados",
-      unread: false,
-      device: "Samsung S24"
     }
   ];
 
@@ -148,14 +126,22 @@ export const MessagesPanel = ({ hideInfo = false }: MessagesPanelProps) => {
     }
   ];
 
+  // Map contacts to their photos
+  const contactPhotos: Record<string, string> = {
+    "Maria Silva": "https://i.pinimg.com/736x/4a/e7/4d/4ae74d5d3c0fdc8d7bc4718dd4794312.jpg",
+    "João Santos": "https://p2.trrsf.com/image/fget/cf/1200/1200/middle/images.terra.com/2013/01/14/oscarfreiretexto.jpg",
+    "Ana Costa": "https://www.cartacapital.com.br/wp-content/uploads/2019/01/armas1.jpg",
+    "Carlos Mendes": "https://live.staticflickr.com/148/374004340_8ecf71b2c0_z.jpg"
+  };
+
   const findConversation = (contact: string) => {
     return conversations.find(conv => conv.contact === contact);
   };
 
   const recentCalls = [
     { contact: "Carlos Mendes", number: "+55 11 96666-5555", time: "14:10", duration: "3:24", type: "incoming", device: "OnePlus 12" },
-    { contact: "Desconhecido", number: "+55 11 95555-4444", time: "13:22", duration: "0:12", type: "missed", device: "Samsung S24" },
-    { contact: "Patricia Lima", number: "+55 11 94444-3333", time: "12:45", duration: "8:45", type: "outgoing", device: "iPhone 15 Pro" }
+    { contact: "Maria Silva", number: "+55 11 95555-4444", time: "13:22", duration: "0:12", type: "missed", device: "Samsung S24" },
+    { contact: "Ana Costa", number: "+55 11 94444-3333", time: "12:45", duration: "8:45", type: "outgoing", device: "iPhone 15 Pro" }
   ];
 
   const filteredMessages = selectedDevice === 'all' 
@@ -233,7 +219,7 @@ export const MessagesPanel = ({ hideInfo = false }: MessagesPanelProps) => {
                         <div className="border border-green-500/20 rounded p-3 hover:bg-green-500/5 transition-colors cursor-pointer">
                           <div className="flex justify-between items-start mb-2">
                             <div className="flex items-center gap-2">
-                              <div className="w-8 h-8 rounded-full" style={{backgroundImage: 'url(https://i.pinimg.com/736x/fa/25/b5/fa25b56f831a5d8cdd2040179fc6b4f3.jpg)', backgroundSize: 'cover'}}></div>
+                              <div className="w-8 h-8 rounded-full border border-green-400/30" style={{backgroundImage: `url(${contactPhotos[msg.contact]})`, backgroundSize: 'cover'}}></div>
                               <span className="text-sm font-medium text-green-400">{maskText(msg.contact)}</span>
                             </div>
                             <span className="text-xs text-muted-foreground">{msg.time}</span>
@@ -241,25 +227,36 @@ export const MessagesPanel = ({ hideInfo = false }: MessagesPanelProps) => {
                           <div className="text-sm text-foreground">{msg.message}</div>
                         </div>
                       </DialogTrigger>
-                      <DialogContent className="cyber-border bg-card/90 backdrop-blur-sm max-w-md">
-                        <DialogHeader>
+                      <DialogContent className="cyber-border bg-card/90 backdrop-blur-sm max-w-md max-h-[80vh]">
+                        <DialogHeader className="pb-2">
                           <DialogTitle className="text-green-400 flex items-center gap-2">
                             💬 {maskText(msg.contact)}
                           </DialogTitle>
                         </DialogHeader>
-                        <div className="space-y-3 max-h-80 overflow-y-auto">
-                          {findConversation(msg.contact)?.messages.map((convMsg) => (
-                            <div key={convMsg.id} className={`flex ${convMsg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                              <div className={`max-w-[70%] p-3 rounded-lg ${
-                                convMsg.sender === 'user' 
-                                  ? 'bg-green-600 text-white' 
-                                  : 'bg-muted text-foreground'
-                              }`}>
-                                <div className="text-sm">{convMsg.message}</div>
-                                <div className="text-xs opacity-70 mt-1">{convMsg.time}</div>
+                        <div className="flex flex-col h-[400px]">
+                          <div className="flex-1 overflow-y-auto space-y-3 px-2">
+                            {findConversation(msg.contact)?.messages.map((convMsg) => (
+                              <div key={convMsg.id} className={`flex ${convMsg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                                <div className={`max-w-[70%] p-3 rounded-lg ${
+                                  convMsg.sender === 'user' 
+                                    ? 'bg-green-600 text-white' 
+                                    : 'bg-muted text-foreground'
+                                }`}>
+                                  <div className="text-sm">{convMsg.message}</div>
+                                  <div className="text-xs opacity-70 mt-1">{convMsg.time}</div>
+                                </div>
                               </div>
+                            ))}
+                          </div>
+                          <div className="border-t border-border/50 pt-3 mt-3">
+                            <div className="flex gap-2">
+                              <input 
+                                className="flex-1 px-3 py-2 bg-muted/50 border border-border rounded-lg text-sm focus:outline-none focus:border-primary"
+                                placeholder="Digite uma mensagem..."
+                              />
+                              <Button size="sm" className="px-3">Enviar</Button>
                             </div>
-                          ))}
+                          </div>
                         </div>
                       </DialogContent>
                     </Dialog>
@@ -275,7 +272,7 @@ export const MessagesPanel = ({ hideInfo = false }: MessagesPanelProps) => {
                         <div className="border border-blue-500/20 rounded p-3 hover:bg-blue-500/5 transition-colors cursor-pointer">
                           <div className="flex justify-between items-start mb-2">
                             <div className="flex items-center gap-2">
-                              <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">✈️</div>
+                              <div className="w-8 h-8 rounded-full border border-blue-400/30" style={{backgroundImage: `url(${contactPhotos[msg.contact]})`, backgroundSize: 'cover'}}></div>
                               <span className="text-sm font-medium text-blue-400">{maskText(msg.contact)}</span>
                             </div>
                             <span className="text-xs text-muted-foreground">{msg.time}</span>
@@ -283,25 +280,36 @@ export const MessagesPanel = ({ hideInfo = false }: MessagesPanelProps) => {
                           <div className="text-sm text-foreground">{msg.message}</div>
                         </div>
                       </DialogTrigger>
-                      <DialogContent className="cyber-border bg-card/90 backdrop-blur-sm max-w-md">
-                        <DialogHeader>
+                      <DialogContent className="cyber-border bg-card/90 backdrop-blur-sm max-w-md max-h-[80vh]">
+                        <DialogHeader className="pb-2">
                           <DialogTitle className="text-blue-400 flex items-center gap-2">
                             ✈️ {maskText(msg.contact)}
                           </DialogTitle>
                         </DialogHeader>
-                        <div className="space-y-3 max-h-80 overflow-y-auto">
-                          {findConversation(msg.contact)?.messages.map((convMsg) => (
-                            <div key={convMsg.id} className={`flex ${convMsg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                              <div className={`max-w-[70%] p-3 rounded-lg ${
-                                convMsg.sender === 'user' 
-                                  ? 'bg-blue-600 text-white' 
-                                  : 'bg-muted text-foreground'
-                              }`}>
-                                <div className="text-sm">{convMsg.message}</div>
-                                <div className="text-xs opacity-70 mt-1">{convMsg.time}</div>
+                        <div className="flex flex-col h-[400px]">
+                          <div className="flex-1 overflow-y-auto space-y-3 px-2">
+                            {findConversation(msg.contact)?.messages.map((convMsg) => (
+                              <div key={convMsg.id} className={`flex ${convMsg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                                <div className={`max-w-[70%] p-3 rounded-lg ${
+                                  convMsg.sender === 'user' 
+                                    ? 'bg-blue-600 text-white' 
+                                    : 'bg-muted text-foreground'
+                                }`}>
+                                  <div className="text-sm">{convMsg.message}</div>
+                                  <div className="text-xs opacity-70 mt-1">{convMsg.time}</div>
+                                </div>
                               </div>
+                            ))}
+                          </div>
+                          <div className="border-t border-border/50 pt-3 mt-3">
+                            <div className="flex gap-2">
+                              <input 
+                                className="flex-1 px-3 py-2 bg-muted/50 border border-border rounded-lg text-sm focus:outline-none focus:border-primary"
+                                placeholder="Digite uma mensagem..."
+                              />
+                              <Button size="sm" className="px-3">Enviar</Button>
                             </div>
-                          ))}
+                          </div>
                         </div>
                       </DialogContent>
                     </Dialog>

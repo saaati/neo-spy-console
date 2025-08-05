@@ -16,6 +16,7 @@ const targets = [
     lastSeen: "2 min atrás",
     location: "Av. Paulista, São Paulo",
     risk: "baixo",
+    photo: "https://i.pinimg.com/736x/4a/e7/4d/4ae74d5d3c0fdc8d7bc4718dd4794312.jpg",
     activities: {
       messages: 12,
       calls: 3,
@@ -30,6 +31,7 @@ const targets = [
     lastSeen: "1h 23min atrás",
     location: "Shopping Ibirapuera",
     risk: "médio",
+    photo: "https://p2.trrsf.com/image/fget/cf/1200/1200/middle/images.terra.com/2013/01/14/oscarfreiretexto.jpg",
     activities: {
       messages: 8,
       calls: 1,
@@ -44,6 +46,7 @@ const targets = [
     lastSeen: "Agora",
     location: "Parque Villa-Lobos",
     risk: "alto",
+    photo: "https://www.cartacapital.com.br/wp-content/uploads/2019/01/armas1.jpg",
     activities: {
       messages: 25,
       calls: 7,
@@ -58,6 +61,7 @@ const targets = [
     lastSeen: "45 min atrás",
     location: "Aeroporto Congonhas",
     risk: "baixo",
+    photo: "https://live.staticflickr.com/148/374004340_8ecf71b2c0_z.jpg",
     activities: {
       messages: 4,
       calls: 2,
@@ -155,8 +159,8 @@ export const TargetsPanel = ({ hideInfo = false }: TargetsPanelProps) => {
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-cover bg-center" 
-                       style={{backgroundImage: 'url(https://i.pinimg.com/736x/fa/25/b5/fa25b56f831a5d8cdd2040179fc6b4f3.jpg)'}}></div>
+                  <div className="w-10 h-10 rounded-full bg-cover bg-center border-2 border-primary/30" 
+                       style={{backgroundImage: `url(${target.photo})`}}></div>
                   <div>
                     <div className="flex items-center gap-2">
                       {editingTarget === target.id ? (
@@ -248,8 +252,8 @@ export const TargetsPanel = ({ hideInfo = false }: TargetsPanelProps) => {
                       </DialogHeader>
                       <div className="space-y-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-full bg-cover bg-center" 
-                               style={{backgroundImage: 'url(https://i.pinimg.com/736x/fa/25/b5/fa25b56f831a5d8cdd2040179fc6b4f3.jpg)'}}></div>
+                          <div className="w-12 h-12 rounded-full bg-cover bg-center border-2 border-primary/50" 
+                               style={{backgroundImage: `url(${target.photo})`}}></div>
                           <div>
                             <h3 className="font-mono text-foreground">{target.name}</h3>
                             <p className="text-sm text-terminal-dim">{target.codename}</p>

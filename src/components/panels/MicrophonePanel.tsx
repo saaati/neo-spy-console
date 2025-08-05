@@ -28,13 +28,14 @@ export const MicrophonePanel = ({ hideInfo = false }: MicrophonePanelProps) => {
     const newState = !isListening;
     setIsListening(newState);
     
-    const now = new Date().toLocaleTimeString('pt-BR');
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('pt-BR', { hour12: false });
     const action = newState ? 'INICIADA' : 'PARADA';
     
     setListeningLogs(prev => [{
       id: Date.now().toString(),
       action: `ESCUTA ${action}`,
-      timestamp: now,
+      timestamp: timeString,
       device: 'Microfone Principal'
     }, ...prev].slice(0, 10)); // Keep only last 10 logs
     
@@ -45,7 +46,7 @@ export const MicrophonePanel = ({ hideInfo = false }: MicrophonePanelProps) => {
         name: `audio_capture_${String(recordings.length + 1).padStart(3, '0')}.wav`,
         duration: `${Math.floor(Math.random() * 3)}:${String(Math.floor(Math.random() * 60)).padStart(2, '0')}`,
         size: `${(Math.random() * 5 + 1).toFixed(1)} MB`,
-        timestamp: now
+        timestamp: timeString
       };
       setRecordings(prev => [newRecording, ...prev]);
     }
