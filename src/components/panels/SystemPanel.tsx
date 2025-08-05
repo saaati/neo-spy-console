@@ -110,7 +110,7 @@ export const SystemPanel = ({ hideInfo = false }: SystemPanelProps) => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Upload */}
                 <div className="p-4 bg-muted/20 rounded cyber-border">
                   <h4 className="text-sm font-mono text-primary mb-3">1. UPLOAD DO PDF</h4>
@@ -200,26 +200,6 @@ export const SystemPanel = ({ hideInfo = false }: SystemPanelProps) => {
                       </Button>
                     </div>
                   )}
-                </div>
-
-                {/* Send */}
-                <div className="p-4 bg-muted/20 rounded cyber-border">
-                  <h4 className="text-sm font-mono text-primary mb-3">3. ENVIAR ({sendCount}/{maxSends})</h4>
-                  
-                  <div className="space-y-2 mb-3">
-                    <div className="text-xs text-muted-foreground">
-                      Tentativas restantes: {maxSends - sendCount}
-                    </div>
-                    <Progress value={(sendCount / maxSends) * 100} className="h-2" />
-                  </div>
-
-                  <Button 
-                    onClick={handleSendPDF}
-                    disabled={!generatedFile || sendCount >= maxSends}
-                    className="w-full cyber-border bg-neon-red/20 hover:bg-neon-red/30 text-neon-red border-neon-red"
-                  >
-                    {sendCount >= maxSends ? 'LIMITE ATINGIDO' : 'ENVIAR PDF'}
-                  </Button>
                 </div>
               </div>
 

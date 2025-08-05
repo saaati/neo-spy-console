@@ -20,11 +20,6 @@ export const PinAuth = ({ onAuthenticated }: PinAuthProps) => {
       setIsAuthenticating(true);
       setTimeout(() => {
         onAuthenticated();
-        toast({
-          title: "✓ Acesso Autorizado",
-          description: "Bem-vindo ao sistema de monitoramento",
-          className: "border-primary bg-primary/10 text-primary"
-        });
       }, 1500);
     } else {
       toast({
