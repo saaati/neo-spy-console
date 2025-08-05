@@ -10,7 +10,11 @@ const fakeCameras = [
   { id: 4, name: "Câmera Externa", status: "online", quality: "4K" },
 ];
 
-export const CamerasPanel = () => {
+interface CamerasPanelProps {
+  hideInfo?: boolean;
+}
+
+export const CamerasPanel = ({ hideInfo = false }: CamerasPanelProps) => {
   const [isRecording, setIsRecording] = useState(false);
   const [selectedCamera, setSelectedCamera] = useState(1);
 

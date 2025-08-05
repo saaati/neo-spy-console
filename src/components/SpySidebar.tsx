@@ -29,6 +29,7 @@ const menuItems = [
   { id: 'cameras' as ActivePanel, title: 'Câmeras', icon: Camera },
   { id: 'messages' as ActivePanel, title: 'Mensagens', icon: MessageSquare },
   { id: 'microphone' as ActivePanel, title: 'Microfone', icon: Mic },
+  { id: 'gallery' as ActivePanel, title: 'Galeria', icon: Eye },
   { id: 'logs' as ActivePanel, title: 'Logs', icon: FileText },
   { id: 'targets' as ActivePanel, title: 'Alvos', icon: Users },
   { id: 'system' as ActivePanel, title: 'Sistema', icon: Settings },

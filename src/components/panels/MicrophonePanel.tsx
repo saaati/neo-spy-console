@@ -11,7 +11,11 @@ const fakeRecordings = [
   { id: 4, name: "audio_capture_004.wav", duration: "2:15", size: "5.2 MB", timestamp: "11:15:44" },
 ];
 
-export const MicrophonePanel = () => {
+interface MicrophonePanelProps {
+  hideInfo?: boolean;
+}
+
+export const MicrophonePanel = ({ hideInfo = false }: MicrophonePanelProps) => {
   const [isListening, setIsListening] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioLevel] = useState(65);

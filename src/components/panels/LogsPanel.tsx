@@ -87,7 +87,11 @@ const getLogColor = (type: string) => {
   }
 };
 
-export const LogsPanel = () => {
+interface LogsPanelProps {
+  hideInfo?: boolean;
+}
+
+export const LogsPanel = ({ hideInfo = false }: LogsPanelProps) => {
   const successCount = systemLogs.filter(log => log.type === "success").length;
   const warningCount = systemLogs.filter(log => log.type === "warning").length;
   const errorCount = systemLogs.filter(log => log.type === "error").length;

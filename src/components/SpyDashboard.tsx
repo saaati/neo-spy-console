@@ -9,37 +9,50 @@ import { MicrophonePanel } from "./panels/MicrophonePanel";
 import { LogsPanel } from "./panels/LogsPanel";
 import { TargetsPanel } from "./panels/TargetsPanel";
 import { SystemPanel } from "./panels/SystemPanel";
+import { GalleryPanel } from "./panels/GalleryPanel";
+import { PinAuth } from "./PinAuth";
+import { PrivacyToggle } from "./PrivacyToggle";
 
-export type ActivePanel = 'location' | 'cameras' | 'messages' | 'microphone' | 'logs' | 'targets' | 'system';
+export type ActivePanel = 'location' | 'cameras' | 'messages' | 'microphone' | 'logs' | 'targets' | 'system' | 'gallery';
 
 export const SpyDashboard = () => {
   const [activePanel, setActivePanel] = useState<ActivePanel>('location');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [hideInfo, setHideInfo] = useState(false);
+
+  if (!isAuthenticated) {
+    return <PinAuth onAuthenticated={() => setIsAuthenticated(true)} />;
+  }
 
   const renderActivePanel = () => {
     switch (activePanel) {
       case 'location':
-        return <LocationPanel />;
+        return <LocationPanel hideInfo={hideInfo} />;
       case 'cameras':
-        return <CamerasPanel />;
+        return <CamerasPanel hideInfo={hideInfo} />;
       case 'messages':
-        return <MessagesPanel />;
+        return <MessagesPanel hideInfo={hideInfo} />;
       case 'microphone':
-        return <MicrophonePanel />;
+        return <MicrophonePanel hideInfo={hideInfo} />;
       case 'logs':
-        return <LogsPanel />;
+        return <LogsPanel hideInfo={hideInfo} />;
       case 'targets':
-        return <TargetsPanel />;
+        return <TargetsPanel hideInfo={hideInfo} />;
       case 'system':
-        return <SystemPanel />;
+        return <SystemPanel hideInfo={hideInfo} />;
+      case 'gallery':
+        return <GalleryPanel hideInfo={hideInfo} />;
       default:
-        return <LocationPanel />;
+        return <LocationPanel hideInfo={hideInfo} />;
     }
   };
 
   return (
     <SidebarProvider>
       <div className="min-h-screen w-full bg-background scanlines">
-        <SpyHeader />
+        <SpyHeader>
+          <PrivacyToggle hideInfo={hideInfo} onToggle={() => setHideInfo(!hideInfo)} />
+        </SpyHeader>
         
         <div className="flex w-full">
           <SpySidebar activePanel={activePanel} setActivePanel={setActivePanel} />

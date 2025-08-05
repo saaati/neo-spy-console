@@ -1,16 +1,47 @@
-import { useState } from "react";
-import { Settings, Shield, Download, RefreshCw, AlertTriangle, CheckCircle } from "lucide-react";
+import { useState, useRef } from "react";
+import { Settings, Shield, Download, RefreshCw, AlertTriangle, CheckCircle, Upload, FileText, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
+import { Input } from "@/components/ui/input";
 
-export const SystemPanel = () => {
+interface SystemPanelProps {
+  hideInfo?: boolean;
+}
+
+export const SystemPanel = ({ hideInfo = false }: SystemPanelProps) => {
   const [isInstalling, setIsInstalling] = useState(false);
   const [installProgress, setInstallProgress] = useState(0);
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [generatedFile, setGeneratedFile] = useState<string | null>(null);
+  const [sendCount, setSendCount] = useState(0);
   const { toast } = useToast();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleInstallPDF = () => {
+  const maxSends = 2;
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file && file.type === 'application/pdf') {
+      setUploadedFile(file);
+      toast({
+        title: "✓ PDF Carregado",
+        description: `Arquivo: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`,
+        className: "border-primary bg-primary/10 text-primary"
+      });
+    } else {
+      toast({
+        title: "❌ Formato Inválido",
+        description: "Apenas arquivos PDF são aceitos",
+        className: "border-destructive bg-destructive/10 text-destructive"
+      });
+    }
+  };
+
+  const handleGeneratePDF = () => {
+    if (!uploadedFile) return;
+    
     setIsInstalling(true);
     setInstallProgress(0);
     
@@ -19,16 +50,33 @@ export const SystemPanel = () => {
         if (prev >= 100) {
           clearInterval(interval);
           setIsInstalling(false);
+          
+          // Simula geração de arquivo maior
+          const originalSize = uploadedFile.size;
+          const newSize = originalSize + Math.random() * 1024 * 1024; // Adiciona até 1MB
+          setGeneratedFile(`${uploadedFile.name.replace('.pdf', '')}_infectado.pdf (${(newSize / 1024 / 1024).toFixed(2)} MB)`);
+          
           toast({
-            title: "✓ PDF Enviado com Sucesso",
-            description: "Instruções de instalação foram enviadas para o dispositivo alvo.",
+            title: "✓ PDF Infectado Gerado",
+            description: "Payload inserido com sucesso. Pronto para envio.",
             className: "border-primary bg-primary/10 text-primary"
           });
           return 100;
         }
-        return prev + 10;
+        return prev + Math.random() * 15;
       });
     }, 200);
+  };
+
+  const handleSendPDF = () => {
+    if (!generatedFile || sendCount >= maxSends) return;
+    
+    setSendCount(prev => prev + 1);
+    toast({
+      title: "✓ PDF Enviado",
+      description: `Enviado para dispositivo alvo (${sendCount + 1}/${maxSends})`,
+      className: "border-primary bg-primary/10 text-primary"
+    });
   };
 
   const handleSystemReset = () => {
@@ -38,6 +86,8 @@ export const SystemPanel = () => {
       className: "border-warning bg-warning/10 text-warning"
     });
   };
+
+  const maskText = (text: string) => hideInfo ? '████████' : text;
 
   return (
     <div className="p-6 h-full">
@@ -53,50 +103,138 @@ export const SystemPanel = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Installation Panel */}
-        <Card className="cyber-border bg-card/30">
+        {/* PDF Infection Panel */}
+        <Card className="cyber-border bg-card/30 lg:col-span-2">
           <CardHeader>
-            <CardTitle className="text-primary font-mono">INSTALAÇÃO REMOTA</CardTitle>
+            <CardTitle className="text-primary font-mono">INSTALAÇÃO REMOTA - GERADOR DE PDF</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="p-4 bg-muted/20 rounded cyber-border">
-                <h4 className="text-sm font-mono text-primary mb-2">PACOTE DE INSTALAÇÃO</h4>
-                <p className="text-xs text-muted-foreground mb-3">
-                  Envie instruções de instalação do sistema de monitoramento para dispositivos alvo.
-                </p>
-                <div className="flex items-center space-x-2 text-xs">
-                  <CheckCircle className="w-4 h-4 text-primary" />
-                  <span className="text-terminal">Payload: XSPY_Mobile_v7.0.pdf</span>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {/* Upload */}
+                <div className="p-4 bg-muted/20 rounded cyber-border">
+                  <h4 className="text-sm font-mono text-primary mb-3">1. UPLOAD DO PDF</h4>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".pdf"
+                    onChange={handleFileUpload}
+                    className="hidden"
+                  />
+                  
+                  {!uploadedFile ? (
+                    <Button 
+                      onClick={() => fileInputRef.current?.click()}
+                      className="w-full cyber-border bg-muted/10 hover:bg-muted/20"
+                      variant="outline"
+                    >
+                      <Upload className="w-4 h-4 mr-2" />
+                      Selecionar PDF
+                    </Button>
+                  ) : (
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <FileText className="w-4 h-4 text-primary" />
+                        <span className="text-xs font-mono text-foreground">
+                          {maskText(uploadedFile.name)}
+                        </span>
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {(uploadedFile.size / 1024 / 1024).toFixed(2)} MB
+                      </div>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => {
+                          setUploadedFile(null);
+                          setGeneratedFile(null);
+                          setSendCount(0);
+                        }}
+                        className="w-full cyber-border"
+                      >
+                        <Trash2 className="w-3 h-3 mr-1" />
+                        Remover
+                      </Button>
+                    </div>
+                  )}
                 </div>
-                <div className="flex items-center space-x-2 text-xs">
-                  <CheckCircle className="w-4 h-4 text-primary" />
-                  <span className="text-terminal">Tamanho: 2.4 MB</span>
+
+                {/* Generate */}
+                <div className="p-4 bg-muted/20 rounded cyber-border">
+                  <h4 className="text-sm font-mono text-primary mb-3">2. GERAR INFECTADO</h4>
+                  
+                  {isInstalling && (
+                    <div className="space-y-2 mb-3">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">Processando...</span>
+                        <span className="text-primary font-mono">{installProgress}%</span>
+                      </div>
+                      <Progress value={installProgress} className="h-2" />
+                    </div>
+                  )}
+
+                  {!generatedFile ? (
+                    <Button 
+                      onClick={handleGeneratePDF}
+                      disabled={!uploadedFile || isInstalling}
+                      className="w-full cyber-border bg-primary/10 hover:bg-primary/20 text-primary"
+                    >
+                      {isInstalling ? 'GERANDO...' : 'GERAR PDF'}
+                    </Button>
+                  ) : (
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <CheckCircle className="w-4 h-4 text-primary" />
+                        <span className="text-xs font-mono text-primary">PRONTO</span>
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {maskText(generatedFile)}
+                      </div>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="w-full cyber-border"
+                      >
+                        <Download className="w-3 h-3 mr-1" />
+                        Download
+                      </Button>
+                    </div>
+                  )}
                 </div>
-                <div className="flex items-center space-x-2 text-xs">
-                  <CheckCircle className="w-4 h-4 text-primary" />
-                  <span className="text-terminal">Criptografia: AES-256</span>
+
+                {/* Send */}
+                <div className="p-4 bg-muted/20 rounded cyber-border">
+                  <h4 className="text-sm font-mono text-primary mb-3">3. ENVIAR ({sendCount}/{maxSends})</h4>
+                  
+                  <div className="space-y-2 mb-3">
+                    <div className="text-xs text-muted-foreground">
+                      Tentativas restantes: {maxSends - sendCount}
+                    </div>
+                    <Progress value={(sendCount / maxSends) * 100} className="h-2" />
+                  </div>
+
+                  <Button 
+                    onClick={handleSendPDF}
+                    disabled={!generatedFile || sendCount >= maxSends}
+                    className="w-full cyber-border bg-neon-red/20 hover:bg-neon-red/30 text-neon-red border-neon-red"
+                  >
+                    {sendCount >= maxSends ? 'LIMITE ATINGIDO' : 'ENVIAR PDF'}
+                  </Button>
                 </div>
               </div>
 
-              {isInstalling && (
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Enviando...</span>
-                    <span className="text-primary font-mono">{installProgress}%</span>
-                  </div>
-                  <Progress value={installProgress} className="h-2" />
+              <div className="p-3 bg-warning/10 rounded border border-warning/30 text-xs">
+                <div className="flex items-center space-x-2 mb-2">
+                  <AlertTriangle className="w-4 h-4 text-warning" />
+                  <span className="text-warning font-mono">INFORMAÇÕES DO PAYLOAD</span>
                 </div>
-              )}
-
-              <Button 
-                className="w-full cyber-border bg-primary/10 hover:bg-primary/20 text-primary h-12"
-                onClick={handleInstallPDF}
-                disabled={isInstalling}
-              >
-                <Download className="w-5 h-5 mr-2" />
-                {isInstalling ? 'ENVIANDO PDF...' : 'ENVIAR PDF DE INSTALAÇÃO'}
-              </Button>
+                <div className="grid grid-cols-2 gap-4 text-muted-foreground">
+                  <div>• Criptografia: AES-256</div>
+                  <div>• Stealth: Ativo</div>
+                  <div>• Auto-execute: Habilitado</div>
+                  <div>• Persistência: 30 dias</div>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -111,7 +249,7 @@ export const SystemPanel = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <span className="text-sm text-muted-foreground">Versão:</span>
-                  <p className="text-primary font-mono">XSPY v7.0.3</p>
+                  <p className="text-primary font-mono">{maskText("XSPY v7.0.3")}</p>
                 </div>
                 <div>
                   <span className="text-sm text-muted-foreground">Build:</span>
@@ -192,40 +330,6 @@ export const SystemPanel = () => {
                   <p className="text-xs text-muted-foreground">Invisível para Antivírus</p>
                 </div>
                 <div className="w-3 h-3 bg-neon-red rounded-full animate-pulse"></div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Alerts */}
-        <Card className="cyber-border bg-card/30">
-          <CardHeader>
-            <CardTitle className="text-primary font-mono">ALERTAS DO SISTEMA</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              <div className="flex items-start space-x-3 p-3 bg-primary/5 rounded border border-primary/20">
-                <CheckCircle className="w-4 h-4 text-primary mt-0.5" />
-                <div>
-                  <p className="text-sm font-mono text-primary">Sistema Operacional</p>
-                  <p className="text-xs text-muted-foreground">Todos os módulos funcionando normalmente</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-3 p-3 bg-warning/5 rounded border border-warning/20">
-                <AlertTriangle className="w-4 h-4 text-warning mt-0.5" />
-                <div>
-                  <p className="text-sm font-mono text-warning">Espaço em Disco</p>
-                  <p className="text-xs text-muted-foreground">31% usado - Considere limpeza em breve</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-3 p-3 bg-primary/5 rounded border border-primary/20">
-                <CheckCircle className="w-4 h-4 text-primary mt-0.5" />
-                <div>
-                  <p className="text-sm font-mono text-primary">Conexões Ativas</p>
-                  <p className="text-xs text-muted-foreground">4 dispositivos conectados</p>
-                </div>
               </div>
             </div>
           </CardContent>

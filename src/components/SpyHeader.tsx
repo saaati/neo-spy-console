@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Wifi, Signal, Shield } from "lucide-react";
 
-export const SpyHeader = () => {
+interface SpyHeaderProps {
+  children?: React.ReactNode;
+}
+
+export const SpyHeader = ({ children }: SpyHeaderProps) => {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
@@ -46,6 +50,8 @@ export const SpyHeader = () => {
       </div>
 
       <div className="flex items-center space-x-6">
+        {children}
+        
         <div className="flex items-center space-x-2">
           <Wifi className="w-4 h-4 text-primary" />
           <Signal className="w-4 h-4 text-primary" />

@@ -10,7 +10,11 @@ const fakeLocations = [
   { time: "11:15:44", location: "Aeroporto de Congonhas - São Paulo, SP", coordinates: "-23.6267, -46.6563" },
 ];
 
-export const LocationPanel = () => {
+interface LocationPanelProps {
+  hideInfo?: boolean;
+}
+
+export const LocationPanel = ({ hideInfo = false }: LocationPanelProps) => {
   const [isTracking, setIsTracking] = useState(true);
   const [currentLocation] = useState(fakeLocations[0]);
 

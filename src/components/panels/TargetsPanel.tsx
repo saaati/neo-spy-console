@@ -88,7 +88,11 @@ const getRiskColor = (risk: string) => {
   }
 };
 
-export const TargetsPanel = () => {
+interface TargetsPanelProps {
+  hideInfo?: boolean;
+}
+
+export const TargetsPanel = ({ hideInfo = false }: TargetsPanelProps) => {
   const onlineTargets = targets.filter(t => t.status === "online").length;
   const highRiskTargets = targets.filter(t => t.risk === "alto").length;
 
