@@ -14,7 +14,8 @@ export const SystemPanel = ({ hideInfo = false }: SystemPanelProps) => {
   const [isInstalling, setIsInstalling] = useState(false);
   const [installProgress, setInstallProgress] = useState(0);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
-  const [generatedFile, setGeneratedFile] = useState<string | null>(null);
+  const [generatedFile, setGeneratedFile] = useState<Blob | null>(null);
+  const [generatedFileName, setGeneratedFileName] = useState<string | null>(null);
   const [sendCount, setSendCount] = useState(0);
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -39,7 +40,7 @@ export const SystemPanel = ({ hideInfo = false }: SystemPanelProps) => {
     }
   };
 
-  const handleGeneratePDF = () => {
+  const handleGeneratePDF = async () => {
     if (!uploadedFile) return;
     
     setIsInstalling(true);
@@ -51,14 +52,34 @@ export const SystemPanel = ({ hideInfo = false }: SystemPanelProps) => {
           clearInterval(interval);
           setIsInstalling(false);
           
-          // Simula geração de arquivo maior
-          const originalSize = uploadedFile.size;
-          const newSize = originalSize + Math.random() * 1024 * 1024; // Adiciona até 1MB
-          setGeneratedFile(`${uploadedFile.name.replace('.pdf', '')}_infectado.pdf (${(newSize / 1024 / 1024).toFixed(2)} MB)`);
+          // Cria arquivo maior (adiciona dados extras ao arquivo original)
+          const reader = new FileReader();
+          reader.onload = () => {
+            const arrayBuffer = reader.result as ArrayBuffer;
+            const originalBytes = new Uint8Array(arrayBuffer);
+            
+            // Adiciona bytes extras para simular "infecção" 
+            const extraBytes = new Uint8Array(Math.floor(Math.random() * 1024 * 1024)); // Até 1MB extra
+            for (let i = 0; i < extraBytes.length; i++) {
+              extraBytes[i] = Math.floor(Math.random() * 256);
+            }
+            
+            // Combina arquivo original + bytes extras
+            const newBytes = new Uint8Array(originalBytes.length + extraBytes.length);
+            newBytes.set(originalBytes);
+            newBytes.set(extraBytes, originalBytes.length);
+            
+            const newBlob = new Blob([newBytes], { type: 'application/pdf' });
+            const newFileName = `${uploadedFile.name.replace('.pdf', '')}_infectado.pdf`;
+            
+            setGeneratedFile(newBlob);
+            setGeneratedFileName(newFileName);
+          };
+          reader.readAsArrayBuffer(uploadedFile);
           
           toast({
             title: "✓ PDF Infectado Gerado",
-            description: "Payload inserido com sucesso. Pronto para envio.",
+            description: "Payload inserido com sucesso. Pronto para download.",
             className: "border-primary bg-primary/10 text-primary"
           });
           return 100;
@@ -146,9 +167,10 @@ export const SystemPanel = ({ hideInfo = false }: SystemPanelProps) => {
                         size="sm"
                         variant="outline"
                         onClick={() => {
-                          setUploadedFile(null);
-                          setGeneratedFile(null);
-                          setSendCount(0);
+          setUploadedFile(null);
+          setGeneratedFile(null);
+          setGeneratedFileName(null);
+          setSendCount(0);
                         }}
                         className="w-full cyber-border"
                       >
@@ -188,12 +210,30 @@ export const SystemPanel = ({ hideInfo = false }: SystemPanelProps) => {
                         <span className="text-xs font-mono text-primary">PRONTO</span>
                       </div>
                       <div className="text-xs text-muted-foreground">
-                        {maskText(generatedFile)}
+                        {maskText(generatedFileName || `Arquivo infectado (${(generatedFile.size / 1024 / 1024).toFixed(2)} MB)`)}
                       </div>
                       <Button
                         size="sm"
                         variant="outline"
                         className="w-full cyber-border"
+                        onClick={() => {
+                          if (generatedFile && generatedFileName) {
+                            const url = URL.createObjectURL(generatedFile);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = generatedFileName;
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                            URL.revokeObjectURL(url);
+                            
+                            toast({
+                              title: "✓ Download Concluído",
+                              description: "PDF infectado baixado com sucesso",
+                              className: "border-primary bg-primary/10 text-primary"
+                            });
+                          }
+                        }}
                       >
                         <Download className="w-3 h-3 mr-1" />
                         Download
