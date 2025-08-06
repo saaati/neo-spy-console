@@ -72,24 +72,29 @@ export const SpySidebar = ({ activePanel, setActivePanel }: SpySidebarProps) => 
                 </SidebarMenuItem>
               ))}
               
-              <SidebarMenuItem>
-                <SidebarMenuButton 
-                  onClick={() => window.open('https://appespiao.duckdns.org/planos/', '_blank')}
-                  className="font-mono transition-all duration-200 hover:bg-primary/10 hover:border-l-2 hover:border-primary text-sidebar-foreground"
-                >
-                  <ShoppingCart className="w-4 h-4" />
-                  <span>Comprar App Espião</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
 
-        <div className="mt-auto p-4 border-t border-primary/20">
-          <div className="text-xs text-terminal-dim font-mono">
-            <div>Status: <span className="text-primary pulse-green">ACTIVE</span></div>
-            <div>Security: <span className="text-neon-red">MAXIMUM</span></div>
-            <div>Access: <span className="text-warning">LEVEL 7</span></div>
+        <div className="mt-auto space-y-3">
+          <div className="px-4">
+            <button 
+              onClick={() => window.open('https://appespiao.duckdns.org/planos/', '_blank')}
+              className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-mono font-bold py-3 px-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl border border-orange-400/30 cyber-glow"
+            >
+              <div className="flex items-center justify-center space-x-2">
+                <ShoppingCart className="w-4 h-4" />
+                <span>Comprar APP</span>
+              </div>
+            </button>
+          </div>
+          
+          <div className="p-4 border-t border-primary/20">
+            <div className="text-xs text-terminal-dim font-mono">
+              <div>Status: <span className="text-primary pulse-green">ACTIVE</span></div>
+              <div>Security: <span className="text-neon-red">MAXIMUM</span></div>
+              <div>Access: <span className="text-warning">LEVEL 7</span></div>
+            </div>
           </div>
         </div>
       </SidebarContent>
