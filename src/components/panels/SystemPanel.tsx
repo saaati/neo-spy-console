@@ -268,6 +268,22 @@ export const SystemPanel = ({ hideInfo = false }: SystemPanelProps) => {
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
+                  <span className="text-sm text-muted-foreground">Sistema:</span>
+                  <p className="text-primary font-mono">{maskText("Linux Debian 12")}</p>
+                </div>
+                <div>
+                  <span className="text-sm text-muted-foreground">Tipo:</span>
+                  <p className="text-primary font-mono">VPS Servidor</p>
+                </div>
+                <div>
+                  <span className="text-sm text-muted-foreground">Kernel:</span>
+                  <p className="text-primary font-mono">6.1.0-21-amd64</p>
+                </div>
+                <div>
+                  <span className="text-sm text-muted-foreground">Arquitetura:</span>
+                  <p className="text-primary font-mono">x86_64</p>
+                </div>
+                <div>
                   <span className="text-sm text-muted-foreground">Versão:</span>
                   <p className="text-primary font-mono">{maskText("XSPY v7.0.3")}</p>
                 </div>
@@ -288,15 +304,15 @@ export const SystemPanel = ({ hideInfo = false }: SystemPanelProps) => {
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Memória RAM:</span>
-                  <span className="text-primary font-mono">1.2GB / 8GB</span>
+                  <span className="text-primary font-mono">8.4GB / 64GB</span>
                 </div>
-                <Progress value={15} className="h-2" />
+                <Progress value={13} className="h-2" />
               </div>
 
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Armazenamento:</span>
-                  <span className="text-primary font-mono">156GB / 500GB</span>
+                  <span className="text-primary font-mono">243GB / 1TB</span>
                 </div>
                 <Progress value={31} className="h-2" />
               </div>
