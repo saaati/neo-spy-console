@@ -35,39 +35,44 @@ export const SpyHeader = ({ children }: SpyHeaderProps) => {
   };
 
   return (
-    <header className="h-16 md:h-18 glass-card border-b border-primary/30 flex items-center justify-between px-4 md:px-8 backdrop-blur-md">
-      <div className="flex items-center space-x-3 md:space-x-6">
-        <SidebarTrigger className="text-primary hover:text-primary/80 hover-glow focus-glow p-2 rounded-lg transition-all" />
-        <div className="flex items-center space-x-3">
+    <header className="h-14 sm:h-16 lg:h-18 glass-card border-b border-primary/30 flex items-center justify-between px-2 sm:px-4 lg:px-8 backdrop-blur-md">
+      <div className="flex items-center space-x-1 sm:space-x-3 lg:space-x-6">
+        <SidebarTrigger className="text-primary hover:text-primary/80 hover-glow focus-glow p-1.5 sm:p-2 rounded-lg transition-all" />
+        <div className="flex items-center space-x-1.5 sm:space-x-3">
           <div className="relative">
-            <Shield className="w-7 h-7 md:w-8 md:h-8 text-primary cyber-glow" />
-            <div className="absolute -top-1 -right-1 w-3 h-3 bg-destructive rounded-full animate-pulse shadow-lg"></div>
+            <Shield className="w-5 h-5 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-primary cyber-glow" />
+            <div className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 w-2 h-2 sm:w-3 sm:h-3 bg-destructive rounded-full animate-pulse shadow-lg"></div>
           </div>
           <div className="flex flex-col">
-            <h1 className="text-xl md:text-3xl font-bold text-primary terminal-glow glitch tracking-wider">
+            <h1 className="text-lg sm:text-xl lg:text-3xl font-bold text-primary terminal-glow glitch tracking-wider">
               XSPY
             </h1>
-            <span className="hidden md:inline text-[10px] text-terminal-dim bg-primary/10 px-2 py-0.5 rounded-full border border-primary/30 font-mono">
+            <span className="hidden sm:inline text-[8px] lg:text-[10px] text-terminal-dim bg-primary/10 px-1.5 py-0.5 lg:px-2 rounded-full border border-primary/30 font-mono">
               ÚLTIMA VERSÃO V3.0
             </span>
           </div>
         </div>
       </div>
 
-      <div className="flex items-center space-x-3 md:space-x-8">
+      <div className="flex items-center space-x-1 sm:space-x-3 lg:space-x-8">
         {children}
         
-        <div className="hidden sm:flex items-center space-x-3 bg-primary/5 px-3 py-2 rounded-lg border border-primary/20">
-          <Wifi className="w-4 h-4 text-primary cyber-glow" />
-          <Signal className="w-4 h-4 text-primary cyber-glow" />
-          <span className="text-primary text-xs md:text-sm font-mono pulse-green font-bold">ONLINE</span>
+        <div className="flex sm:hidden items-center space-x-1 bg-primary/5 px-1.5 py-1 rounded border border-primary/20">
+          <Wifi className="w-3 h-3 text-primary cyber-glow" />
+          <Signal className="w-3 h-3 text-primary cyber-glow" />
         </div>
         
-        <div className="text-right font-mono bg-card/50 px-3 py-2 rounded-lg border border-primary/20 backdrop-blur-sm">
-          <div className="text-primary text-lg md:text-xl font-bold terminal-glow tracking-wider">
+        <div className="hidden sm:flex items-center space-x-2 lg:space-x-3 bg-primary/5 px-2 py-1.5 lg:px-3 lg:py-2 rounded-lg border border-primary/20">
+          <Wifi className="w-3 h-3 lg:w-4 lg:h-4 text-primary cyber-glow" />
+          <Signal className="w-3 h-3 lg:w-4 lg:h-4 text-primary cyber-glow" />
+          <span className="text-primary text-[10px] sm:text-xs lg:text-sm font-mono pulse-green font-bold">ONLINE</span>
+        </div>
+        
+        <div className="text-right font-mono bg-card/50 px-1.5 py-1 sm:px-3 sm:py-2 rounded-lg border border-primary/20 backdrop-blur-sm">
+          <div className="text-primary text-sm sm:text-lg lg:text-xl font-bold terminal-glow tracking-wider">
             {formatTime(currentTime)}
           </div>
-          <div className="hidden md:block text-terminal-dim text-xs mt-1">
+          <div className="hidden lg:block text-terminal-dim text-xs mt-1">
             {formatDate(currentTime)}
           </div>
         </div>

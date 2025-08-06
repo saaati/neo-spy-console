@@ -10,6 +10,20 @@ import gallery3 from "@/assets/gallery3.jpg";
 import gallery4 from "@/assets/gallery4.jpg";
 import gallery5 from "@/assets/gallery5.jpg";
 import gallery6 from "@/assets/gallery6.jpg";
+import gallery7 from "@/assets/gallery7.jpg";
+import gallery8 from "@/assets/gallery8.jpg";
+import gallery9 from "@/assets/gallery9.jpg";
+import gallery10 from "@/assets/gallery10.jpg";
+import gallery11 from "@/assets/gallery11.jpg";
+import gallery12 from "@/assets/gallery12.jpg";
+import gallery13 from "@/assets/gallery13.jpg";
+import gallery14 from "@/assets/gallery14.jpg";
+import gallery15 from "@/assets/gallery15.jpg";
+import gallery16 from "@/assets/gallery16.gif";
+import gallery17 from "@/assets/gallery17.jpg";
+import gallery18 from "@/assets/gallery18.jpg";
+import gallery19 from "@/assets/gallery19.jpg";
+import gallery20 from "@/assets/gallery20.jpg";
 
 interface GalleryItem {
   id: string;
@@ -91,6 +105,146 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
       location: 'Los Angeles, CA',
       device: 'Samsung S24',
       thumbnail: gallery6
+    },
+    {
+      id: '7',
+      name: 'selfie_praia.jpg',
+      type: 'photo',
+      date: '2024-01-15 09:15',
+      size: '1.8 MB',
+      location: 'Copacabana, RJ',
+      device: 'Samsung S24',
+      thumbnail: gallery7
+    },
+    {
+      id: '8',
+      name: 'garota_festa.jpg',
+      type: 'photo',
+      date: '2024-01-15 08:45',
+      size: '2.2 MB',
+      location: 'Vila Madalena, SP',
+      device: 'iPhone 15 Pro',
+      thumbnail: gallery8
+    },
+    {
+      id: '9',
+      name: 'modelo_ensaio.jpg',
+      type: 'photo',
+      date: '2024-01-15 08:20',
+      size: '3.4 MB',
+      location: 'Ipanema, RJ',
+      device: 'Xiaomi 14',
+      thumbnail: gallery9
+    },
+    {
+      id: '10',
+      name: 'look_balada.jpg',
+      type: 'photo',
+      date: '2024-01-15 07:50',
+      size: '2.7 MB',
+      location: 'Barra da Tijuca, RJ',
+      device: 'OnePlus 12',
+      thumbnail: gallery10
+    },
+    {
+      id: '11',
+      name: 'garota_piscina.jpg',
+      type: 'photo',
+      date: '2024-01-15 07:30',
+      size: '2.1 MB',
+      location: 'Leblon, RJ',
+      device: 'Samsung S24',
+      thumbnail: gallery11
+    },
+    {
+      id: '12',
+      name: 'selfie_espelho.jpg',
+      type: 'photo',
+      date: '2024-01-15 07:15',
+      size: '1.9 MB',
+      location: 'Jardins, SP',
+      device: 'iPhone 15 Pro',
+      thumbnail: gallery12
+    },
+    {
+      id: '13',
+      name: 'praia_verao.jpg',
+      type: 'photo',
+      date: '2024-01-15 06:45',
+      size: '2.5 MB',
+      location: 'Fortaleza, CE',
+      device: 'Xiaomi 14',
+      thumbnail: gallery13
+    },
+    {
+      id: '14',
+      name: 'piscina_resort.jpg',
+      type: 'photo',
+      date: '2024-01-15 06:20',
+      size: '2.8 MB',
+      location: 'Porto de Galinhas, PE',
+      device: 'OnePlus 12',
+      thumbnail: gallery14
+    },
+    {
+      id: '15',
+      name: 'garota_academia.jpg',
+      type: 'photo',
+      date: '2024-01-15 05:55',
+      size: '2.3 MB',
+      location: 'Moema, SP',
+      device: 'Samsung S24',
+      thumbnail: gallery15
+    },
+    {
+      id: '16',
+      name: 'dancando_festa.gif',
+      type: 'video',
+      date: '2024-01-15 05:30',
+      size: '12.4 MB',
+      location: 'Lapa, RJ',
+      device: 'iPhone 15 Pro',
+      thumbnail: gallery16
+    },
+    {
+      id: '17',
+      name: 'snap_filtro.png',
+      type: 'screenshot',
+      date: '2024-01-15 05:10',
+      size: '1.2 MB',
+      location: 'Centro, SP',
+      device: 'Xiaomi 14',
+      thumbnail: gallery17
+    },
+    {
+      id: '18',
+      name: 'selfie_carro.jpg',
+      type: 'photo',
+      date: '2024-01-15 04:45',
+      size: '2.0 MB',
+      location: 'Bela Vista, SP',
+      device: 'OnePlus 12',
+      thumbnail: gallery18
+    },
+    {
+      id: '19',
+      name: 'garota_quarto.jpg',
+      type: 'photo',
+      date: '2024-01-15 04:20',
+      size: '1.7 MB',
+      location: 'Perdizes, SP',
+      device: 'Samsung S24',
+      thumbnail: gallery19
+    },
+    {
+      id: '20',
+      name: 'look_noite.jpg',
+      type: 'photo',
+      date: '2024-01-15 03:55',
+      size: '2.6 MB',
+      location: 'Vila Olímpia, SP',
+      device: 'iPhone 15 Pro',
+      thumbnail: gallery20
     }
   ];
 
