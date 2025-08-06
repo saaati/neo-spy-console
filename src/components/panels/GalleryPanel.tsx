@@ -48,7 +48,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
   const galleryItems: GalleryItem[] = [
     {
       id: '1',
-      name: 'protesto_oscarfreire.jpg',
+      name: 'IMG_20241205_143022.png',
       type: 'photo',
       date: '2024-01-15 14:23',
       size: '2.4 MB',
@@ -58,7 +58,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '2',
-      name: 'pessoa_suspeita.jpg',
+      name: 'DSC_8947.png',
       type: 'photo',
       date: '2024-01-15 13:45',
       size: '892 KB',
@@ -68,7 +68,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '3',
-      name: 'armas_apreendidas.jpg',
+      name: 'IMG_4532.png',
       type: 'photo',
       date: '2024-01-15 12:30',
       size: '15.2 MB',
@@ -78,7 +78,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '4',
-      name: 'local_encontro.jpg',
+      name: 'Photo_2024_0115_111547.png',
       type: 'photo',
       date: '2024-01-15 11:15',
       size: '3.1 MB',
@@ -88,7 +88,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '5',
-      name: 'casal_praca.jpg',
+      name: 'IMG_9831.png',
       type: 'photo',
       date: '2024-01-15 10:00',
       size: '1.8 MB',
@@ -98,7 +98,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '6',
-      name: 'celebridades.jpg',
+      name: 'Screenshot_20241205_093045.png',
       type: 'photo',
       date: '2024-01-15 09:30',
       size: '654 KB',
@@ -108,7 +108,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '7',
-      name: 'selfie_praia.jpg',
+      name: 'IMG_7462.png',
       type: 'photo',
       date: '2024-01-15 09:15',
       size: '1.8 MB',
@@ -118,7 +118,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '8',
-      name: 'garota_festa.jpg',
+      name: 'DSC_1829.png',
       type: 'photo',
       date: '2024-01-15 08:45',
       size: '2.2 MB',
@@ -128,7 +128,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '9',
-      name: 'modelo_ensaio.jpg',
+      name: 'Photo_2024_0115_082015.png',
       type: 'photo',
       date: '2024-01-15 08:20',
       size: '3.4 MB',
@@ -138,7 +138,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '10',
-      name: 'look_balada.jpg',
+      name: 'IMG_5633.png',
       type: 'photo',
       date: '2024-01-15 07:50',
       size: '2.7 MB',
@@ -148,7 +148,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '11',
-      name: 'garota_piscina.jpg',
+      name: 'Screenshot_20241205_073012.png',
       type: 'photo',
       date: '2024-01-15 07:30',
       size: '2.1 MB',
@@ -158,7 +158,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '12',
-      name: 'selfie_espelho.jpg',
+      name: 'IMG_2947.png',
       type: 'photo',
       date: '2024-01-15 07:15',
       size: '1.9 MB',
@@ -168,7 +168,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '13',
-      name: 'praia_verao.jpg',
+      name: 'DSC_6281.png',
       type: 'photo',
       date: '2024-01-15 06:45',
       size: '2.5 MB',
@@ -178,7 +178,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '14',
-      name: 'piscina_resort.jpg',
+      name: 'Photo_2024_0115_062034.png',
       type: 'photo',
       date: '2024-01-15 06:20',
       size: '2.8 MB',
@@ -188,7 +188,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '15',
-      name: 'garota_academia.jpg',
+      name: 'IMG_8174.png',
       type: 'photo',
       date: '2024-01-15 05:55',
       size: '2.3 MB',
@@ -198,7 +198,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '16',
-      name: 'dancando_festa.gif',
+      name: 'VID_20241205_053047.mp4',
       type: 'video',
       date: '2024-01-15 05:30',
       size: '12.4 MB',
@@ -208,7 +208,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '17',
-      name: 'snap_filtro.png',
+      name: 'Screenshot_20241205_051023.png',
       type: 'screenshot',
       date: '2024-01-15 05:10',
       size: '1.2 MB',
@@ -218,7 +218,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '18',
-      name: 'selfie_carro.jpg',
+      name: 'IMG_3582.png',
       type: 'photo',
       date: '2024-01-15 04:45',
       size: '2.0 MB',
@@ -228,7 +228,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '19',
-      name: 'garota_quarto.jpg',
+      name: 'DSC_9246.png',
       type: 'photo',
       date: '2024-01-15 04:20',
       size: '1.7 MB',
@@ -238,7 +238,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
     },
     {
       id: '20',
-      name: 'look_noite.jpg',
+      name: 'Photo_2024_0115_035518.png',
       type: 'photo',
       date: '2024-01-15 03:55',
       size: '2.6 MB',
