@@ -38,7 +38,9 @@ export const SpyHeader = ({ children }: SpyHeaderProps) => {
     <header className="h-14 sm:h-16 lg:h-18 glass-card border-b border-primary/30 flex items-center justify-between px-2 sm:px-4 lg:px-8 backdrop-blur-md">
       <div className="flex items-center space-x-1 sm:space-x-3 lg:space-x-6">
         <SidebarTrigger className="text-primary hover:text-primary/80 hover-glow focus-glow p-1.5 sm:p-2 rounded-lg transition-all" />
-        <span className="sm:hidden text-primary font-mono text-sm font-bold">MENU</span>
+        <SidebarTrigger asChild>
+          <span className="sm:hidden text-primary font-mono text-sm font-bold cursor-pointer hover:text-primary/80 transition-colors">MENU</span>
+        </SidebarTrigger>
         <div className="flex items-center space-x-1.5 sm:space-x-3">
           <div className="relative">
             <Shield className="w-5 h-5 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-primary cyber-glow" />
