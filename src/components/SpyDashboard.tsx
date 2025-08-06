@@ -48,6 +48,8 @@ export const SpyDashboard = () => {
     }
   };
 
+  const showUserIdentifier = activePanel === 'location';
+
   return (
     <SidebarProvider>
       <div className="min-h-screen w-full bg-background scanlines">
@@ -59,17 +61,19 @@ export const SpyDashboard = () => {
           <SpySidebar activePanel={activePanel} setActivePanel={setActivePanel} />
           
           <main className="flex-1 p-2 md:p-6 lg:p-8">
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-3 md:gap-6 h-full min-h-[calc(100vh-7rem)]">
-              <div className="lg:col-span-4 xl:col-span-3 order-2 lg:order-1">
+            <div className={`grid gap-3 md:gap-6 h-full min-h-[calc(100vh-7rem)] ${showUserIdentifier ? 'grid-cols-1 lg:grid-cols-4' : 'grid-cols-1'}`}>
+              <div className={showUserIdentifier ? 'lg:col-span-4 xl:col-span-3 order-2 lg:order-1' : 'col-span-1'}>
                 <div className="glass-card cyber-border rounded-xl h-full overflow-hidden">
                   <div className="p-3 md:p-6 lg:p-8 h-full">
                     {renderActivePanel()}
                   </div>
                 </div>
               </div>
-              <div className="lg:col-span-4 xl:col-span-1 order-1 lg:order-2">
-                <UserIdentifier />
-              </div>
+              {showUserIdentifier && (
+                <div className="lg:col-span-4 xl:col-span-1 order-1 lg:order-2">
+                  <UserIdentifier />
+                </div>
+              )}
             </div>
           </main>
         </div>
