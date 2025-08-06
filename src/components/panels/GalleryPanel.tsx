@@ -249,8 +249,8 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
   ];
 
   const filteredItems = selectedDevice === 'all' 
-    ? galleryItems 
-    : galleryItems.filter(item => item.device === selectedDevice);
+    ? galleryItems.slice().reverse() 
+    : galleryItems.filter(item => item.device === selectedDevice).reverse();
 
   const maskText = (text: string) => hideInfo ? '████████' : text;
 
