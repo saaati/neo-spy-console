@@ -12,6 +12,7 @@ import { SystemPanel } from "./panels/SystemPanel";
 import { GalleryPanel } from "./panels/GalleryPanel";
 import { PinAuth } from "./PinAuth";
 import { PrivacyToggle } from "./PrivacyToggle";
+import { UserIdentifier } from "./UserIdentifier";
 
 export type ActivePanel = 'location' | 'cameras' | 'messages' | 'microphone' | 'logs' | 'targets' | 'system' | 'gallery';
 
@@ -58,9 +59,16 @@ export const SpyDashboard = () => {
           <SpySidebar activePanel={activePanel} setActivePanel={setActivePanel} />
           
           <main className="flex-1 p-3 md:p-8 lg:p-10">
-            <div className="glass-card cyber-border rounded-xl h-full min-h-[calc(100vh-7rem)] overflow-hidden">
-              <div className="p-4 md:p-6 lg:p-8 h-full">
-                {renderActivePanel()}
+            <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 h-full min-h-[calc(100vh-7rem)]">
+              <div className="xl:col-span-3">
+                <div className="glass-card cyber-border rounded-xl h-full overflow-hidden">
+                  <div className="p-4 md:p-6 lg:p-8 h-full">
+                    {renderActivePanel()}
+                  </div>
+                </div>
+              </div>
+              <div className="xl:col-span-1">
+                <UserIdentifier />
               </div>
             </div>
           </main>

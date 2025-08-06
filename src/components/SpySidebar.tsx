@@ -74,7 +74,7 @@ export const SpySidebar = ({ activePanel, setActivePanel }: SpySidebarProps) => 
               
               <SidebarMenuItem>
                 <SidebarMenuButton 
-                  onClick={() => window.open('https://codefence.duckdns.org/xspy', '_blank')}
+                  onClick={() => window.open('https://appespiao.duckdns.org/planos/', '_blank')}
                   className="font-mono transition-all duration-200 hover:bg-primary/10 hover:border-l-2 hover:border-primary text-sidebar-foreground"
                 >
                   <ShoppingCart className="w-4 h-4" />

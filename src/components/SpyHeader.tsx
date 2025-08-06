@@ -48,7 +48,7 @@ export const SpyHeader = ({ children }: SpyHeaderProps) => {
               XSPY
             </h1>
             <span className="hidden md:inline text-[10px] text-terminal-dim bg-primary/10 px-2 py-0.5 rounded-full border border-primary/30 font-mono">
-              v7.0 • ACTIVE
+              ÚLTIMA VERSÃO V3.0
             </span>
           </div>
         </div>

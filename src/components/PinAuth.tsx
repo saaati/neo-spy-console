@@ -88,7 +88,7 @@ export const PinAuth = ({ onAuthenticated }: PinAuthProps) => {
           
           <div className="text-center">
             <p className="text-xs text-muted-foreground font-mono">
-              PIN: 1234 (educacional)
+              PIN: 1234
             </p>
           </div>
         </CardContent>
