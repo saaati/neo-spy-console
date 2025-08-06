@@ -17,7 +17,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from "@/components/ui/sidebar";
 import { ActivePanel } from "./SpyDashboard";
 
@@ -38,15 +37,6 @@ const menuItems = [
 ];
 
 export const SpySidebar = ({ activePanel, setActivePanel }: SpySidebarProps) => {
-  const { isMobile, setOpenMobile } = useSidebar();
-
-  const handleMenuClick = (panel: ActivePanel) => {
-    setActivePanel(panel);
-    if (isMobile) {
-      setOpenMobile(false);
-    }
-  };
-
   return (
     <Sidebar className="border-r border-primary/20 bg-sidebar">
       <SidebarContent>
@@ -67,7 +57,7 @@ export const SpySidebar = ({ activePanel, setActivePanel }: SpySidebarProps) => 
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.id}>
                   <SidebarMenuButton 
-                    onClick={() => handleMenuClick(item.id)}
+                    onClick={() => setActivePanel(item.id)}
                     className={`
                       font-mono transition-all duration-200 hover:bg-primary/10 hover:border-l-2 hover:border-primary
                       ${activePanel === item.id 
@@ -82,21 +72,20 @@ export const SpySidebar = ({ activePanel, setActivePanel }: SpySidebarProps) => 
                 </SidebarMenuItem>
               ))}
               
+              <SidebarMenuItem>
+                <SidebarMenuButton 
+                  onClick={() => window.open('https://appespiao.duckdns.org/planos/', '_blank')}
+                  className="font-mono transition-all duration-200 hover:bg-primary/10 hover:border-l-2 hover:border-primary text-sidebar-foreground"
+                >
+                  <ShoppingCart className="w-4 h-4" />
+                  <span>Comprar App Espião</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
 
-        <div className="mt-auto p-4 border-t border-primary/20 space-y-4">
-          <SidebarMenuItem>
-            <SidebarMenuButton 
-              onClick={() => window.open('https://appespiao.duckdns.org/planos/', '_blank')}
-              className="font-mono transition-all duration-200 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white border border-orange-400 cyber-glow w-full justify-center"
-            >
-              <ShoppingCart className="w-4 h-4" />
-              <span>Comprar APP</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          
+        <div className="mt-auto p-4 border-t border-primary/20">
           <div className="text-xs text-terminal-dim font-mono">
             <div>Status: <span className="text-primary pulse-green">ACTIVE</span></div>
             <div>Security: <span className="text-neon-red">MAXIMUM</span></div>
