@@ -361,13 +361,13 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
                       <span className="sm:hidden">🔍</span>
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="cyber-border bg-card/90 backdrop-blur-sm max-w-2xl">
+                  <DialogContent className="cyber-border bg-card/90 backdrop-blur-sm max-w-md">
                     <div className="text-center space-y-4">
-                      <div className="w-full max-h-96 overflow-hidden rounded">
+                      <div className="w-full aspect-[9/16] overflow-hidden rounded">
                         <img 
                           src={item.thumbnail} 
                           alt={item.name} 
-                          className="w-full h-full object-contain"
+                          className="w-full h-full object-cover"
                         />
                       </div>
                       <div>

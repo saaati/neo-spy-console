@@ -17,6 +17,11 @@ export const SystemPanel = ({ hideInfo = false }: SystemPanelProps) => {
   const [generatedFile, setGeneratedFile] = useState<Blob | null>(null);
   const [generatedFileName, setGeneratedFileName] = useState<string | null>(null);
   const [sendCount, setSendCount] = useState(0);
+  const [systemResources, setSystemResources] = useState({
+    ram: 13,
+    cpu: 64,
+    storage: 46
+  });
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -101,6 +106,13 @@ export const SystemPanel = ({ hideInfo = false }: SystemPanelProps) => {
   };
 
   const handleSystemReset = () => {
+    // Reduz o uso de recursos
+    setSystemResources({
+      ram: Math.max(5, systemResources.ram - Math.floor(Math.random() * 5 + 3)),
+      cpu: Math.max(20, systemResources.cpu - Math.floor(Math.random() * 15 + 10)),
+      storage: Math.max(30, systemResources.storage - Math.floor(Math.random() * 8 + 5))
+    });
+    
     toast({
       title: "⚠️ Sistema Reinicializado",
       description: "Todos os dados temporários foram limpos. Conexões reestabelecidas.",
@@ -252,7 +264,7 @@ export const SystemPanel = ({ hideInfo = false }: SystemPanelProps) => {
                   <div>• Criptografia: AES-256</div>
                   <div>• Stealth: Ativo</div>
                   <div>• Auto-execute: Habilitado</div>
-                  <div>• Persistência: 30 dias</div>
+                  <div>• Persistência: 120 dias</div>
                 </div>
               </div>
             </div>
@@ -289,15 +301,15 @@ export const SystemPanel = ({ hideInfo = false }: SystemPanelProps) => {
                 </div>
                 <div>
                   <span className="text-sm text-muted-foreground">Build:</span>
-                  <p className="text-primary font-mono">2024.02.15</p>
+                  <p className="text-primary font-mono">05/08/2025</p>
                 </div>
                 <div>
                   <span className="text-sm text-muted-foreground">Uptime:</span>
-                  <p className="text-primary font-mono">72h 45m</p>
+                  <p className="text-primary font-mono">385h</p>
                 </div>
                 <div>
                   <span className="text-sm text-muted-foreground">CPU:</span>
-                  <p className="text-primary font-mono">23%</p>
+                  <p className="text-primary font-mono">{systemResources.cpu}%</p>
                 </div>
               </div>
 
@@ -306,15 +318,15 @@ export const SystemPanel = ({ hideInfo = false }: SystemPanelProps) => {
                   <span className="text-muted-foreground">Memória RAM:</span>
                   <span className="text-primary font-mono">8.4GB / 64GB</span>
                 </div>
-                <Progress value={13} className="h-2" />
+                <Progress value={systemResources.ram} className="h-2" />
               </div>
 
-              <div className="space-y-2">
+                <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Armazenamento:</span>
-                  <span className="text-primary font-mono">243GB / 1TB</span>
+                  <span className="text-primary font-mono">465GB / 1TB</span>
                 </div>
-                <Progress value={31} className="h-2" />
+                <Progress value={systemResources.storage} className="h-2" />
               </div>
 
               <Button 
