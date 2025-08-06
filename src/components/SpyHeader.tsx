@@ -44,7 +44,7 @@ export const SpyHeader = ({ children }: SpyHeaderProps) => {
             <div className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 w-2 h-2 sm:w-3 sm:h-3 bg-destructive rounded-full animate-pulse shadow-lg"></div>
           </div>
           <div className="flex flex-col">
-            <h1 className="text-lg sm:text-xl lg:text-3xl font-bold text-primary terminal-glow glitch tracking-wider">
+            <h1 className="hidden sm:block text-lg sm:text-xl lg:text-3xl font-bold text-primary terminal-glow glitch tracking-wider">
               XSPY
             </h1>
             <span className="hidden sm:inline text-[8px] lg:text-[10px] text-terminal-dim bg-primary/10 px-1.5 py-0.5 lg:px-2 rounded-full border border-primary/30 font-mono">
@@ -68,8 +68,8 @@ export const SpyHeader = ({ children }: SpyHeaderProps) => {
           <span className="text-primary text-[10px] sm:text-xs lg:text-sm font-mono pulse-green font-bold">ONLINE</span>
         </div>
         
-        <div className="text-right font-mono bg-card/50 px-1.5 py-1 sm:px-3 sm:py-2 rounded-lg border border-primary/20 backdrop-blur-sm">
-          <div className="text-primary text-sm sm:text-lg lg:text-xl font-bold terminal-glow tracking-wider">
+        <div className="text-right font-mono bg-card/50 px-1 py-1 sm:px-3 sm:py-2 rounded-lg border border-primary/20 backdrop-blur-sm min-w-0">
+          <div className="text-primary text-xs sm:text-lg lg:text-xl font-bold terminal-glow tracking-wider whitespace-nowrap">
             {formatTime(currentTime)}
           </div>
           <div className="hidden lg:block text-terminal-dim text-xs mt-1">

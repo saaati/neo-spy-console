@@ -20,7 +20,7 @@ interface UserData {
 const mockUsers: UserData[] = [
   {
     id: "user_001",
-    name: "ALVO PRINCIPAL",
+    name: "USUÁRIO ATIVO",
     device: "mobile",
     status: "online",
     lastSeen: "Agora",
@@ -33,7 +33,7 @@ const mockUsers: UserData[] = [
   },
   {
     id: "user_002", 
-    name: "ALVO SECUNDÁRIO",
+    name: "USUÁRIO INATIVO",
     device: "desktop",
     status: "offline",
     lastSeen: "2h atrás",

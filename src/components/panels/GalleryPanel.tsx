@@ -355,9 +355,10 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
               <div className="flex space-x-2">
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button size="sm" variant="outline" className="flex-1 cyber-border">
+                    <Button size="sm" variant="outline" className="flex-1 cyber-border text-xs">
                       <Eye className="w-3 h-3 mr-1" />
-                      Ver
+                      <span className="hidden sm:inline">Ver</span>
+                      <span className="sm:hidden">🔍</span>
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="cyber-border bg-card/90 backdrop-blur-sm max-w-2xl">
@@ -377,7 +378,7 @@ export const GalleryPanel = ({ hideInfo = false }: GalleryPanelProps) => {
                   </DialogContent>
                 </Dialog>
                 
-                <Button size="sm" variant="outline" className="cyber-border">
+                <Button size="sm" variant="outline" className="cyber-border text-xs p-1">
                   <Download className="w-3 h-3" />
                 </Button>
               </div>
