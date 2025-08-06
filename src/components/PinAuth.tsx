@@ -23,7 +23,7 @@ export const PinAuth = ({ onAuthenticated }: PinAuthProps) => {
       }, 1500);
     } else {
       toast({
-        title: "❌ PIN Incorreto",
+        title: "❌ SENHA Incorreta",
         description: "Tente novamente",
         className: "border-destructive bg-destructive/10 text-destructive"
       });
@@ -42,14 +42,14 @@ export const PinAuth = ({ onAuthenticated }: PinAuthProps) => {
             XSPY
           </CardTitle>
           <p className="text-muted-foreground">
-            Digite o PIN para acessar o painel
+            Digite a SENHA para acessar o painel
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="relative">
             <Input
               type={showPin ? "text" : "password"}
-              placeholder="Digite o PIN"
+              placeholder="Digite a SENHA"
               value={pin}
               onChange={(e) => setPin(e.target.value)}
               className="cyber-border bg-card/20 text-center text-lg font-mono"
@@ -88,7 +88,7 @@ export const PinAuth = ({ onAuthenticated }: PinAuthProps) => {
           
           <div className="text-center">
             <p className="text-xs text-muted-foreground font-mono">
-              PIN: 1234
+              SENHA: 1234
             </p>
           </div>
         </CardContent>

@@ -39,9 +39,6 @@ export const LocationPanel = ({ hideInfo = false }: LocationPanelProps) => {
         </h2>
         <div className="flex items-center space-x-2">
           <Target className={`w-5 h-5 ${isTracking ? 'text-primary pulse-green' : 'text-muted-foreground'}`} />
-          <span className="text-sm font-mono">
-            {isTracking ? 'TRACKING ACTIVE' : 'TRACKING OFFLINE'}
-          </span>
         </div>
       </div>
 

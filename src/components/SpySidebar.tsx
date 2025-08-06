@@ -33,7 +33,7 @@ const menuItems = [
   { id: 'gallery' as ActivePanel, title: 'Galeria', icon: Eye },
   { id: 'logs' as ActivePanel, title: 'Logs', icon: FileText },
   { id: 'targets' as ActivePanel, title: 'Alvos', icon: Users },
-  { id: 'system' as ActivePanel, title: 'Sistema', icon: Settings },
+  { id: 'system' as ActivePanel, title: 'Sistema (Gerar Arquivo)', icon: Settings },
 ];
 
 export const SpySidebar = ({ activePanel, setActivePanel }: SpySidebarProps) => {

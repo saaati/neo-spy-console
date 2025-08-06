@@ -53,9 +53,7 @@ export const SpyDashboard = () => {
   return (
     <SidebarProvider>
       <div className="min-h-screen w-full bg-background scanlines">
-        <SpyHeader>
-          <PrivacyToggle hideInfo={hideInfo} onToggle={() => setHideInfo(!hideInfo)} />
-        </SpyHeader>
+        <SpyHeader />
         
         <div className="flex w-full">
           <SpySidebar activePanel={activePanel} setActivePanel={setActivePanel} />
