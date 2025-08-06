@@ -5,6 +5,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import gallery1 from "@/assets/gallery1.jpg";
+import gallery2 from "@/assets/gallery2.jpg";
+import gallery3 from "@/assets/gallery3.jpg";
+import gallery4 from "@/assets/gallery4.jpg";
+import gallery5 from "@/assets/gallery5.jpg";
+import gallery6 from "@/assets/gallery6.jpg";
 
 interface Message {
   id: number;
@@ -84,6 +90,58 @@ export const MessagesPanel = ({ hideInfo = false }: MessagesPanelProps) => {
       message: "Vamos nos encontrar hoje?",
       unread: true,
       device: "OnePlus 12"
+    },
+    {
+      id: 5,
+      type: "whatsapp",
+      contact: "Pedro Lima",
+      number: "+55 11 96666-5555",
+      time: "15:10",
+      message: "Oi, tudo bem? Viu as fotos que mandei?",
+      unread: true,
+      device: "Samsung S24"
+    },
+    {
+      id: 6,
+      type: "telegram",
+      contact: "Fernanda Reis",
+      number: "@fernanda_r",
+      time: "14:55",
+      message: "📸 Foto enviada",
+      unread: true,
+      device: "iPhone 15 Pro",
+      hasMedia: true,
+      mediaType: "photo"
+    },
+    {
+      id: 7,
+      type: "whatsapp",
+      contact: "Roberto Silva",
+      number: "+55 11 95555-4444",
+      time: "14:40",
+      message: "Conseguiu resolver aquela situação?",
+      unread: false,
+      device: "Xiaomi 14"
+    },
+    {
+      id: 8,
+      type: "sms",
+      contact: "Juliana Martins",
+      number: "+55 11 94444-3333",
+      time: "14:20",
+      message: "Obrigada pela ajuda hoje! 😊",
+      unread: false,
+      device: "OnePlus 12"
+    },
+    {
+      id: 9,
+      type: "telegram",
+      contact: "Lucas Oliveira",
+      number: "@lucas_dev",
+      time: "13:30",
+      message: "Acabei de chegar no escritório",
+      unread: true,
+      device: "Samsung S24"
     }
   ];
 
@@ -123,6 +181,57 @@ export const MessagesPanel = ({ hideInfo = false }: MessagesPanelProps) => {
         { id: 1, sender: "contact", message: "Olha essa foto que tirei!", time: "12:28" },
         { id: 2, sender: "contact", message: "📸 Foto", time: "12:30", hasMedia: true, mediaType: "photo" }
       ]
+    },
+    {
+      contact: "Pedro Lima",
+      device: "Samsung S24",
+      messages: [
+        { id: 1, sender: "contact", message: "Oi, tudo bem?", time: "15:05" },
+        { id: 2, sender: "user", message: "Sim! Como está o trabalho?", time: "15:07" },
+        { id: 3, sender: "contact", message: "Corrido, mas bem. Olha essas fotos:", time: "15:08" },
+        { id: 4, sender: "contact", message: "📸 Foto", time: "15:09", hasMedia: true, mediaType: "photo" },
+        { id: 5, sender: "contact", message: "Oi, tudo bem? Viu as fotos que mandei?", time: "15:10" }
+      ]
+    },
+    {
+      contact: "Fernanda Reis",
+      device: "iPhone 15 Pro",
+      messages: [
+        { id: 1, sender: "contact", message: "Oi! Como foi seu dia?", time: "14:50" },
+        { id: 2, sender: "user", message: "Foi bom! E o seu?", time: "14:52" },
+        { id: 3, sender: "contact", message: "Também foi ótimo! Tirei uma foto linda hoje", time: "14:53" },
+        { id: 4, sender: "contact", message: "📸 Foto enviada", time: "14:55", hasMedia: true, mediaType: "photo" }
+      ]
+    },
+    {
+      contact: "Roberto Silva",
+      device: "Xiaomi 14",
+      messages: [
+        { id: 1, sender: "user", message: "Preciso da sua ajuda com um projeto", time: "14:35" },
+        { id: 2, sender: "contact", message: "Claro! Em que posso ajudar?", time: "14:37" },
+        { id: 3, sender: "user", message: "É sobre aquela apresentação", time: "14:38" },
+        { id: 4, sender: "contact", message: "Conseguiu resolver aquela situação?", time: "14:40" }
+      ]
+    },
+    {
+      contact: "Juliana Martins",
+      device: "OnePlus 12",
+      messages: [
+        { id: 1, sender: "contact", message: "Oi! Muito obrigada pela ajuda!", time: "14:15" },
+        { id: 2, sender: "user", message: "De nada! Foi um prazer ajudar", time: "14:17" },
+        { id: 3, sender: "contact", message: "Consegui terminar tudo graças a você", time: "14:18" },
+        { id: 4, sender: "contact", message: "Obrigada pela ajuda hoje! 😊", time: "14:20" }
+      ]
+    },
+    {
+      contact: "Lucas Oliveira",
+      device: "Samsung S24",
+      messages: [
+        { id: 1, sender: "contact", message: "Bom dia! Como está?", time: "13:25" },
+        { id: 2, sender: "user", message: "Bom dia! Tudo bem, e você?", time: "13:27" },
+        { id: 3, sender: "contact", message: "Bem! Saindo para o trabalho agora", time: "13:28" },
+        { id: 4, sender: "contact", message: "Acabei de chegar no escritório", time: "13:30" }
+      ]
     }
   ];
 
@@ -131,7 +240,19 @@ export const MessagesPanel = ({ hideInfo = false }: MessagesPanelProps) => {
     "Maria Silva": "https://i.pinimg.com/736x/4a/e7/4d/4ae74d5d3c0fdc8d7bc4718dd4794312.jpg",
     "João Santos": "https://p2.trrsf.com/image/fget/cf/1200/1200/middle/images.terra.com/2013/01/14/oscarfreiretexto.jpg",
     "Ana Costa": "https://www.cartacapital.com.br/wp-content/uploads/2019/01/armas1.jpg",
-    "Carlos Mendes": "https://live.staticflickr.com/148/374004340_8ecf71b2c0_z.jpg"
+    "Carlos Mendes": "https://live.staticflickr.com/148/374004340_8ecf71b2c0_z.jpg",
+    "Pedro Lima": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+    "Fernanda Reis": "https://images.unsplash.com/photo-1494790108755-2616b612b6c1?w=400",
+    "Roberto Silva": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400",
+    "Juliana Martins": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400",
+    "Lucas Oliveira": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400"
+  };
+
+  // Map contacts to gallery photos for media messages
+  const mediaPhotos: Record<string, string[]> = {
+    "Ana Costa": [gallery1, gallery2],
+    "Pedro Lima": [gallery3, gallery4],
+    "Fernanda Reis": [gallery5, gallery6]
   };
 
   const findConversation = (contact: string) => {
@@ -242,7 +363,18 @@ export const MessagesPanel = ({ hideInfo = false }: MessagesPanelProps) => {
                                     ? 'bg-green-600 text-white' 
                                     : 'bg-muted text-foreground'
                                 }`}>
-                                  <div className="text-sm">{convMsg.message}</div>
+                                  {convMsg.hasMedia && convMsg.mediaType === 'photo' && mediaPhotos[msg.contact] ? (
+                                    <div className="space-y-2">
+                                      <img 
+                                        src={mediaPhotos[msg.contact][0]} 
+                                        alt="Foto enviada" 
+                                        className="max-w-full h-32 object-cover rounded-lg"
+                                      />
+                                      <div className="text-sm">{convMsg.message}</div>
+                                    </div>
+                                  ) : (
+                                    <div className="text-sm">{convMsg.message}</div>
+                                  )}
                                   <div className="text-xs opacity-70 mt-1">{convMsg.time}</div>
                                 </div>
                               </div>
@@ -295,7 +427,18 @@ export const MessagesPanel = ({ hideInfo = false }: MessagesPanelProps) => {
                                     ? 'bg-blue-600 text-white' 
                                     : 'bg-muted text-foreground'
                                 }`}>
-                                  <div className="text-sm">{convMsg.message}</div>
+                                  {convMsg.hasMedia && convMsg.mediaType === 'photo' && mediaPhotos[msg.contact] ? (
+                                    <div className="space-y-2">
+                                      <img 
+                                        src={mediaPhotos[msg.contact][1] || mediaPhotos[msg.contact][0]} 
+                                        alt="Foto enviada" 
+                                        className="max-w-full h-32 object-cover rounded-lg"
+                                      />
+                                      <div className="text-sm">{convMsg.message}</div>
+                                    </div>
+                                  ) : (
+                                    <div className="text-sm">{convMsg.message}</div>
+                                  )}
                                   <div className="text-xs opacity-70 mt-1">{convMsg.time}</div>
                                 </div>
                               </div>
