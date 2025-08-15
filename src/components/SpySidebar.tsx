@@ -79,7 +79,7 @@ export const SpySidebar = ({ activePanel, setActivePanel }: SpySidebarProps) => 
         <div className="mt-auto space-y-3">
           <div className="px-4">
             <button 
-              onClick={() => window.open('https://appespiao.duckdns.org/planos/', '_blank')}
+              onClick={() => window.open('https://xespiao.com/planos/', '_blank')}
               className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-mono font-bold py-3 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl border border-orange-400/30"
             >
               <div className="flex items-center justify-center space-x-2">
